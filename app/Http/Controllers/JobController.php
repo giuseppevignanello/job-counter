@@ -37,7 +37,9 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
-        //
+        $valData = $request->validated();
+        $job = Job::create($valData);
+        return response()->json($job);
     }
 
     /**
