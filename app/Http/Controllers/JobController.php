@@ -26,7 +26,6 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -50,7 +49,8 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        $job = Job::find($job->id);
+        return response()->json($job);
     }
 
     /**
@@ -73,7 +73,9 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
-        //
+        $valData = $request->validated();
+        $job->update($valData);
+        return response()->json($job);
     }
 
     /**
