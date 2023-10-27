@@ -73,6 +73,7 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
+        $job = Job::find($job->id);
         $valData = $request->validated();
         $job->update($valData);
         return response()->json($job);
