@@ -1,0 +1,27 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --primary-color: #0073e6;
+    --secondary-color: #4a90e2;
+
+    --background-light: #f4f4f4;
+    --background-dark: #222;
+
+    --text-light: #fff;
+    --text-dark: #333;
+
+    --accent-color-1: #00b894;
+    --accent-color-2: #fca130;
+}
+
+.appHeader {
+    height: 50px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--text-light);
+    font-weight: bold;
+}
