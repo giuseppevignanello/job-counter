@@ -33,21 +33,23 @@ const AppMain = () => {
 
   return (
     <div className='container'>
-      <div className='row row-cols-6 justify-content-center mt-3'>
-        <div>
-          <h2>Saved</h2>
-          <ul>
+    
+      <div className='row row-cols-3
+       justify-content-between mt-3'>
+        <div className='box'>
+          <h4 className='text-center box_title'>Saved</h4>
+          <ul className='list-unstyled'>
              {savedJobs.map((job, index) => (
-             <li key={index}>{job.company}</li>
+             <li className='box_item' key={index}>{job.company}</li>
              ))}
           </ul>
 
         </div>
-        <div>
-          <h2>Applied</h2>
-          <ul>
+        <div className='box'>
+          <h4 className='text-center box_title'>Applied</h4>
+          <ul className='list-unstyled'>
               {appliedJobs.map((job, index) => (
-              <li key={index}>{job.company}</li>
+              <li className='box_item' key={index}>{job.company}</li>
               ))}
             </ul>
 
