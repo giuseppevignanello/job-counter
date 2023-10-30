@@ -32,7 +32,9 @@ const JobDetail = () => {
 
 
     return (
-        <div>{job.title}</div>
+        <div>{job.title}
+        
+        </div>
     )
 }
 
