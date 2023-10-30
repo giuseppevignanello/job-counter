@@ -41,3 +41,10 @@ body {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+
+.job_title {
+}
+
+.job_company {
+    font-weight: 300;
+}
