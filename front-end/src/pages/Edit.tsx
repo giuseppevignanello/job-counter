@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Create = () => {
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
     const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
 
     interface Job {
         id: number;
@@ -27,6 +26,19 @@ const Create = () => {
         sendOrSave: false,
         time: new Date().toISOString().slice(0, -5),
     });
+
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/${id}`)
+            .then((response) => {
+                const existingData = response.data;
+
+                setFormData(existingData);
+            })
+            .catch((error) => {
+                console.error("Error fetching existing data: ", error);
+            });
+    }, [apiUrl, id]);
 
     function handleChange(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -49,7 +61,7 @@ const Create = () => {
         e.preventDefault();
 
         axios
-            .post(apiUrl, FormData)
+            .put(`${apiUrl}/${id}`, FormData)
             .then((response) => {
                 console.log("Success: ", response.data);
                 navigate("/");
@@ -61,11 +73,6 @@ const Create = () => {
 
     return (
         <div className="container mt-4">
-            <Link to={`/`}>
-                <button type="button" className="btn btn-secondary">
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-            </Link>
             <form onSubmit={send}>
                 <div className="mb-3">
                     <div>

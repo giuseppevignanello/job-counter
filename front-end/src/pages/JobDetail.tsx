@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Job {
     id: number;
@@ -29,7 +32,21 @@ const JobDetail = () => {
             });
     }, [apiUrl]);
 
-    return <div>{job.title}</div>;
+    return (
+        <div>
+            <Link to={`/`}>
+                <button type="button" className="btn btn-secondary">
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+            </Link>
+            {job.title}
+            <Link to={`/edit/${id}`}>
+                <button type="button" className="btn btn-secondary">
+                    Edit
+                </button>
+            </Link>
+        </div>
+    );
 };
 
 export default JobDetail;
