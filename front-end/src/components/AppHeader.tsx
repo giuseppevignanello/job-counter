@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 const AppHeader = () => {
   return (
@@ -9,7 +10,9 @@ const AppHeader = () => {
           </div>
           <div className="buttons me-2">
             <div>
-              <button type="button" className="btn-light btn">Add</button>
+              <button type="button" className="btn-light btn">
+              <Link className='text-dark text-decoration-none' to={`/create`}>Add</Link>
+              </button>
             </div>
           </div>
         </header>

@@ -86,10 +86,11 @@ const AppMain = () => {
               </li>
               </Link>
               ))}
-            </ul>
-
+          </ul>
         </div>
       </div>
+      
+
     </div>
   );
 };
