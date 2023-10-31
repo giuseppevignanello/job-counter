@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +19,19 @@ const JobDetail = () => {
     );
     const [job, setJob] = useState<Job>(Object);
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
+
+    function destroy() {
+        axios
+            .delete(`${apiUrl}/${id}`)
+            .then(() => {
+                console.log("Element removed");
+                navigate("/");
+            })
+            .catch((error) => {
+                console.error("Error", error);
+            });
+    }
 
     useEffect(() => {
         axios
@@ -45,6 +58,9 @@ const JobDetail = () => {
                     Edit
                 </button>
             </Link>
+            <button type="button" className="btn btn-danger" onClick={destroy}>
+                Delete
+            </button>
         </div>
     );
 };
