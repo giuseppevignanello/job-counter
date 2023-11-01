@@ -16,7 +16,6 @@ const Create = () => {
 
     interface Job {
         id: number;
-        sendOrSave: boolean;
         time: string;
         title: string;
         company: string;
