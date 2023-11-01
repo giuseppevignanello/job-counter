@@ -6,7 +6,7 @@
         "time": "2023-10-23T09:00:00",
         "description": "2-4 years of post-college experiences. React and Angular required",
         "location": "Barcelona",
-        "sendOrSave": true
+        "category_id": 2
     },
     {
         "company": "Bunzl Distribution",
@@ -15,7 +15,7 @@
         "time": "2023-10-24T09:00:00",
         "description": "Se pide formacion scolastico o universitaria. Focalizado en Magento",
         "location": "Barcelona",
-        "sendOrSave": true
+        "category_id": 2
     },
     {
         "company": "Alvarium.io",
@@ -24,6 +24,6 @@
         "time": "2023-10-24T09:30:00",
         "description": "Suited on my stack",
         "location": "Barcelona",
-        "sendOrSave": true
+        "category_id": 2
     }
 ]

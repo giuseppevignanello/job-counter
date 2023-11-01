@@ -25,7 +25,7 @@ class JobSeeder extends Seeder
             $newJob->time = $job['time'];
             $newJob->description = $job['description'];
             $newJob->location = $job['location'];
-            $newJob->sendOrSave = $job['sendOrSave'];
+            $newJob->category_id = $job['category_id'];
             $newJob->save();
         }
     }

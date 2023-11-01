@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::post('/jobs', [JobController::class, 'store']);
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 Route::put('/jobs/{job}', [JobController::class, 'update']);
 Route::delete('/jobs/{job}', [JobController::class, 'delete']);
+Route::get('/categories', [CategoryController::class, 'index']);

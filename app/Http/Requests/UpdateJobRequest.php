@@ -30,7 +30,7 @@ class UpdateJobRequest extends FormRequest
             'time' => 'required',
             'description' => 'nullable',
             'location' => 'nullable',
-            'sendOrSave' => 'required',
+            'category' => 'nullable'
         ];
     }
 }

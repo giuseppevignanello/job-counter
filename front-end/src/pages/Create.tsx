@@ -8,6 +8,10 @@ const Create = () => {
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
+    const [apiCategoriesUrl, setApiCategoriesUrl] = useState<string>(
+        "http://127.0.0.1:8000/api/categories"
+    );
+
     const navigate = useNavigate();
 
     interface Job {
@@ -18,32 +22,46 @@ const Create = () => {
         company: string;
     }
 
+    interface Category {
+        id: number;
+        name: string;
+    }
+
+    const [categories, setCategories] = useState<Category[]>([]);
+
     const [FormData, setFormData] = useState({
         title: "",
         company: "",
         url: "",
         description: "",
         location: "",
-        sendOrSave: false,
+        category_id: "",
         time: new Date().toISOString().slice(0, -5),
     });
 
+    useEffect(() => {
+        axios
+            .get(apiCategoriesUrl)
+            .then((response) => {
+                const categories = response.data;
+                setCategories(categories);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    });
+
     function handleChange(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
     ) {
-        const { name, value, type } = e.target;
-        if (type === "checkbox") {
-            const val = (e.target as HTMLInputElement).checked;
-            setFormData({
-                ...FormData,
-                [name]: val,
-            });
-        } else {
-            setFormData({
-                ...FormData,
-                [name]: value,
-            });
-        }
+        const { name, value } = e.target;
+
+        setFormData({
+            ...FormData,
+            [name]: value,
+        });
     }
     function send(e: React.FormEvent) {
         e.preventDefault();
@@ -132,16 +150,24 @@ const Create = () => {
                             />
                         </label>
                     </div>
-                    <div className="d-flex gap-2">
-                        <label>{"Have you applyied yet?"}</label>
-                        <div className="form-check">
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                name="sendOrSave"
-                                checked={FormData.sendOrSave}
+                    <div>
+                        <label>{"Select a category"}</label>
+                        <div className="mb-3">
+                            <select
+                                className="form-select w-50"
+                                name="category_id"
+                                value={FormData.category_id}
                                 onChange={handleChange}
-                            />
+                            >
+                                {categories.map((category) => (
+                                    <option
+                                        key={category.id}
+                                        value={category.id}
+                                    >
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 </div>
