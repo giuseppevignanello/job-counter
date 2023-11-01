@@ -49,7 +49,7 @@ const Create = () => {
             .catch((error) => {
                 console.error("Error: ", error);
             });
-    });
+    }, []);
 
     function handleChange(
         e: React.ChangeEvent<
@@ -65,6 +65,7 @@ const Create = () => {
     }
     function send(e: React.FormEvent) {
         e.preventDefault();
+        console.log(FormData);
 
         axios
             .post(apiUrl, FormData)
@@ -159,6 +160,7 @@ const Create = () => {
                                 value={FormData.category_id}
                                 onChange={handleChange}
                             >
+                                <option value="">Select a category</option>
                                 {categories.map((category) => (
                                     <option
                                         key={category.id}

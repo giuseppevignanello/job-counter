@@ -30,7 +30,7 @@ class StoreJobRequest extends FormRequest
             'time' => 'required',
             'description' => 'nullable',
             'location' => 'nullable',
-            'category' => 'nullable'
+            'category_id' => ['exists:categories,id'],
         ];
     }
 }

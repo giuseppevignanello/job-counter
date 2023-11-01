@@ -15,7 +15,8 @@ class Job extends Model
         'url',
         'time',
         'description',
-        'location'
+        'location',
+        "category_id"
     ];
 
     public function category(): BelongsTo
