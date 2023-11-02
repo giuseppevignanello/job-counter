@@ -100,7 +100,7 @@ const AppMain = () => {
     return (
         <div className="container">
             <div
-                className="row row-cols-sm-1 row-cols-md-5
+                className="row row-cols-sm-1 row-cols-md-3
        justify-content-between mt-3"
             >
                 <div className="box mt-3">

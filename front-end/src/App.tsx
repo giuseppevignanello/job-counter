@@ -11,7 +11,7 @@ function App() {
         <BrowserRouter>
             <div className="wrapper">
                 <AppHeader></AppHeader>
-                <div className="d-flex main_section">
+                <div className="main_section">
                     <SideBar></SideBar>
                     <div className="content content-container">
                         <Routes>

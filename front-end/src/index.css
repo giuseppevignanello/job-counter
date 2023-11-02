@@ -2,12 +2,16 @@ body {
     font-family: "League Spartan", sans-serif !important;
 }
 
+#root {
+    background-color: #84c1ff;
+    height: 100vh;
+}
+
 :root {
-    --primary-color: #0073e6;
     --secondary-color: #4a90e2;
 
     --background-light: #fafafa;
-    --background-gray: #e9eaec;
+    --background-gray: #f3f5f8;
     --background-dark: #222;
 
     --text-light: #fff;
@@ -51,18 +55,18 @@ body {
 }
 
 .main_section {
-    height: calc(100% - 50px);
+    height: calc(100% - 90px);
 }
 
 .sidebar {
-    width: 8%;
-
     background-color: var(--background-gray);
     border-right: 1px solid black;
+    justify-content: space-around;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .content {
-    width: 90%;
     background-color: var(--background-light);
     padding-left: 15px;
     padding-right: 15px;
@@ -84,7 +88,7 @@ body {
 }
 
 .box-content {
-    max-height: 300px;
+    max-height: 110px;
     overflow-y: scroll;
 }
 
