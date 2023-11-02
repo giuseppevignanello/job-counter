@@ -6,7 +6,8 @@ body {
     --primary-color: #0073e6;
     --secondary-color: #4a90e2;
 
-    --background-light: #f4f4f4;
+    --background-light: #fafafa;
+    --background-gray: #e9eaec;
     --background-dark: #222;
 
     --text-light: #fff;
@@ -16,19 +17,59 @@ body {
     --accent-color-2: #fca130;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--background-dark);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.wrapper {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    height: 90vh;
+    border: 1px solid black;
+}
+
 .appHeader {
     height: 50px;
     position: sticky;
-    top: 0;
+    top: 5%;
     width: 100%;
-    background: var(--primary-color);
+    border-bottom: 1px solid black;
     color: var(--text-light);
     font-weight: bold;
 }
 
+.main_section {
+    height: calc(100% - 50px);
+}
+
+.sidebar {
+    width: 8%;
+
+    background-color: var(--background-gray);
+    border-right: 1px solid black;
+}
+
+.content {
+    width: 90%;
+    background-color: var(--background-light);
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .box {
-    border: 1px solid gray;
-    border-radius: 10px;
+    border: 1px solid rgb(158, 158, 158);
     padding: 1rem;
 }
 
@@ -42,10 +83,20 @@ body {
     padding-bottom: 0.5rem;
 }
 
+.box-content {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
 .job_title {
     margin-bottom: 0.3rem !important;
 }
 
 .job_company {
     font-weight: 300;
+}
+
+.content-container {
+    height: 100%;
+    overflow-y: scroll;
 }

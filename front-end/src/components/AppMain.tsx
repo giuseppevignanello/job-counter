@@ -61,7 +61,7 @@ const AppMain = () => {
                 );
                 setOfferJobs(offerJobs);
 
-                const refusedJobs = fetchedJobs.filer(
+                const refusedJobs = fetchedJobs.filter(
                     (job: Job) => job.category_id == 5
                 );
                 setRefusedJobs(refusedJobs);
@@ -74,12 +74,12 @@ const AppMain = () => {
     return (
         <div className="container">
             <div
-                className="row row-cols-sm-1 row-cols-md-4
+                className="row row-cols-sm-1 row-cols-md-5
        justify-content-between mt-3"
             >
                 <div className="box mt-3">
                     <h4 className="text-center box_title">Saved</h4>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled box-content">
                         {savedJobs.map((job, index) => (
                             <Link
                                 className="text-dark text-decoration-none"
@@ -109,7 +109,7 @@ const AppMain = () => {
                 </div>
                 <div className="box mt-3">
                     <h4 className="text-center box_title">Applied</h4>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled box-content">
                         {appliedJobs.map((job, index) => (
                             <Link
                                 className="text-dark text-decoration-none"
@@ -139,7 +139,7 @@ const AppMain = () => {
                 </div>
                 <div className="box mt-3">
                     <h4 className="text-center box_title">Interview</h4>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled box-content">
                         {interviewJobs.map((job, index) => (
                             <Link
                                 className="text-dark text-decoration-none"
@@ -169,7 +169,7 @@ const AppMain = () => {
                 </div>
                 <div className="box mt-3">
                     <h4 className="text-center box_title">Offer</h4>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled box-content">
                         {offerJobs.map((job, index) => (
                             <Link
                                 className="text-dark text-decoration-none"
@@ -199,7 +199,7 @@ const AppMain = () => {
                 </div>
                 <div className="box mt-3">
                     <h4 className="text-center box_title">Refused</h4>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled box-content">
                         {refusedJobs.map((job, index) => (
                             <Link
                                 className="text-dark text-decoration-none"
@@ -227,6 +227,13 @@ const AppMain = () => {
                         ))}
                     </ul>
                 </div>
+            </div>
+            <div>
+                <h4>Counter</h4>
+                <p>Total jobs: {jobs.length}</p>
+                <p>Applied jobs: {appliedJobs.length}</p>
+                <p>Interviews: {interviewJobs.length}</p>
+                <p>Refused jobs: {refusedJobs.length}</p>
             </div>
         </div>
     );
