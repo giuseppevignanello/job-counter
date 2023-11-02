@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux/es/exports";
+import { actions } from "../state/actions/index";
+import { ActionType } from "../state/action-types";
 
 interface Job {
     id: number;
@@ -27,6 +30,7 @@ const AppMain = () => {
     const [interviewJobs, setInterviewJobs] = useState<Job[]>([]);
     const [offerJobs, setOfferJobs] = useState<Job[]>([]);
     const [refusedJobs, setRefusedJobs] = useState<Job[]>([]);
+    const dispatch = useDispatch();
 
     function formatDate(timeString: string) {
         const date = new Date(timeString);
@@ -65,6 +69,28 @@ const AppMain = () => {
                     (job: Job) => job.category_id == 5
                 );
                 setRefusedJobs(refusedJobs);
+
+                //save in the store
+                dispatch({
+                    type: ActionType.JOBCOUNTER,
+                    payload: fetchedJobs.length,
+                });
+                dispatch({
+                    type: ActionType.APPLIEDJOBCOUNTER,
+                    payload: appliedJobs.length,
+                });
+                dispatch({
+                    type: ActionType.INTERVIEWJOBCOUNTER,
+                    payload: interviewJobs.length,
+                });
+                dispatch({
+                    type: ActionType.OFFERJOBCOUNTER,
+                    payload: offerJobs.length,
+                });
+                dispatch({
+                    type: ActionType.REFUSEDJOBCOUNTER,
+                    payload: refusedJobs.length,
+                });
             })
             .catch((error) => {
                 console.error("Error", error);
@@ -227,13 +253,6 @@ const AppMain = () => {
                         ))}
                     </ul>
                 </div>
-            </div>
-            <div>
-                <h4>Counter</h4>
-                <p>Total jobs: {jobs.length}</p>
-                <p>Applied jobs: {appliedJobs.length}</p>
-                <p>Interviews: {interviewJobs.length}</p>
-                <p>Refused jobs: {refusedJobs.length}</p>
             </div>
         </div>
     );

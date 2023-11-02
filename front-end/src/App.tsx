@@ -4,6 +4,7 @@ import AppMain from "./components/AppMain";
 import JobDetail from "./pages/JobDetail";
 import Create from "./pages/Create";
 import Edit from "./pages/Edit";
+import SideBar from "./components/SideBar";
 
 function App() {
     return (
@@ -11,7 +12,7 @@ function App() {
             <div className="wrapper">
                 <AppHeader></AppHeader>
                 <div className="d-flex main_section">
-                    <div className="sidebar"></div>
+                    <SideBar></SideBar>
                     <div className="content content-container">
                         <Routes>
                             <Route>
