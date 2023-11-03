@@ -3,12 +3,12 @@ body {
 }
 
 #root {
-    background-color: #84c1ff;
+    background-color: #d9f0fe;
     height: 100vh;
 }
 
 :root {
-    --secondary-color: #4a90e2;
+    --secondary-color: #d9f0fe;
 
     --background-light: #fafafa;
     --background-gray: #f3f5f8;
@@ -56,6 +56,7 @@ body {
 
 .main_section {
     height: calc(100% - 90px);
+    box-shadow: 5px 20px 15px 10px gray;
 }
 
 .sidebar {
