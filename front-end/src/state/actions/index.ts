@@ -1,33 +1,24 @@
 import { ActionType } from "../action-types/index";
-
-interface JobCounterAction {
-    type: ActionType.JOBCOUNTER;
-    payload: number;
+export interface Job {
+    id: number;
+    time: string;
+    title: string;
+    company: string;
+    category_id: number;
+}
+interface JobsAction {
+    type: ActionType.JOBS;
+    payload: Record<string, Job[]>;
 }
 
-interface AppyledJobCounterAction {
-    type: ActionType.APPLIEDJOBCOUNTER;
-    payload: number;
+interface CategoriesAction {
+    type: ActionType.CATEGORIES;
+    payload: Array<String>;
 }
 
-interface InterviewJobCounterAction {
-    type: ActionType.INTERVIEWJOBCOUNTER;
-    payload: number;
+interface CategorizedJobsAction {
+    type: ActionType.CATEGORIZEDJOBS;
+    payload: Record<string, Job[]>;
 }
 
-interface OfferJobCounterAction {
-    type: ActionType.OFFERJOBCOUNTER;
-    payload: number;
-}
-
-interface RefusedJobCounterAction {
-    type: ActionType.REFUSEDJOBCOUNTER;
-    payload: number;
-}
-
-export type Action =
-    | JobCounterAction
-    | AppyledJobCounterAction
-    | InterviewJobCounterAction
-    | OfferJobCounterAction
-    | RefusedJobCounterAction;
+export type Action = JobsAction | CategoriesAction | CategorizedJobsAction;

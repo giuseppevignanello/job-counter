@@ -2,44 +2,29 @@ import { ActionType } from "../action-types";
 import { Dispatch } from "redux";
 import { Action } from "../actions/index";
 
-export const jobCounter = (count: number) => {
+export const jobs = (list: Array<string>) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
-            type: ActionType.JOBCOUNTER,
-            payload: count,
+            type: ActionType.JOBS,
+            payload: list,
         });
     };
 };
 
-export const appliedJobCounter = (count: number) => {
+export const categories = (list: Array<string>) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
-            type: ActionType.APPLIEDJOBCOUNTER,
-            payload: count,
+            type: ActionType.CATEGORIES,
+            payload: list,
         });
     };
 };
-export const interviewJobCounter = (count: number) => {
+
+export const categorizedJobs = (list: Array<string>) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
-            type: ActionType.INTERVIEWJOBCOUNTER,
-            payload: count,
-        });
-    };
-};
-export const offerJobCounter = (count: number) => {
-    return (dispatch: Dispatch<Action>) => {
-        dispatch({
-            type: ActionType.OFFERJOBCOUNTER,
-            payload: count,
-        });
-    };
-};
-export const refusedJobCounter = (count: number) => {
-    return (dispatch: Dispatch<Action>) => {
-        dispatch({
-            type: ActionType.REFUSEDJOBCOUNTER,
-            payload: count,
+            type: ActionType.CATEGORIZEDJOBS,
+            payload: list,
         });
     };
 };

@@ -19,6 +19,7 @@ const JobDetail = () => {
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
+
     const [job, setJob] = useState<Job>(Object);
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();

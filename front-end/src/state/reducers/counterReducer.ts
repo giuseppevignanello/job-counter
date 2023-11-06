@@ -2,25 +2,20 @@ import { ActionType } from "../action-types";
 import { Action } from "../actions/index";
 
 const initialState = {
-    jobCounter: 0,
-    appliedJobCounter: 0,
-    interviewJobCounter: 0,
-    offerJobCounter: 0,
-    refusedJobCounter: 0,
+    jobs: [],
+    categories: [],
+    categorizedJobs: [],
 };
 
 const reducer = (state = initialState, action: Action) => {
     switch (action.type) {
-        case ActionType.JOBCOUNTER:
-            return { ...state, jobCounter: action.payload };
-        case ActionType.APPLIEDJOBCOUNTER:
-            return { ...state, appliedJobCounter: action.payload };
-        case ActionType.INTERVIEWJOBCOUNTER:
-            return { ...state, interviewJobCounter: action.payload };
-        case ActionType.OFFERJOBCOUNTER:
-            return { ...state, offerJobCounter: action.payload };
-        case ActionType.REFUSEDJOBCOUNTER:
-            return { ...state, refusedJobCounter: action.payload };
+        case ActionType.JOBS:
+            return { ...state, jobs: action.payload };
+        case ActionType.CATEGORIES:
+            return { ...state, categories: action.payload };
+        case ActionType.CATEGORIZEDJOBS:
+            return { ...state, categorizedJobs: action.payload };
+
         default:
             return state;
     }

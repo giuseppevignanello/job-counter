@@ -5,6 +5,7 @@ import JobDetail from "./pages/JobDetail";
 import Create from "./pages/Create";
 import Edit from "./pages/Edit";
 import SideBar from "./components/SideBar";
+import CategoryDetail from "./pages/CategoryDetail";
 
 function App() {
     return (
@@ -20,6 +21,10 @@ function App() {
                                 <Route
                                     path="job_detail/:id"
                                     element={<JobDetail />}
+                                />
+                                <Route
+                                    path="category_detail/:id"
+                                    element={<CategoryDetail />}
                                 />
                                 <Route path="create" element={<Create />} />
                                 <Route path="edit/:id" element={<Edit />} />

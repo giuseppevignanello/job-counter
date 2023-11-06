@@ -8,11 +8,11 @@ const SideBar = () => {
 
     return (
         <div className="d-none d-md-flex sidebar">
-            <div>Total: {state.jobCounter}</div>
-            <div>Applied: {state.appliedJobCounter}</div>
-            <div>Interview: {state.interviewJobCounter}</div>
-            <div>Offer: {state.offerJobCounter}</div>
-            <div>Refused: {state.refusedJobCounter}</div>
+            <div>Total: {state.jobs.length} </div>
+            <div>Applied: {state.categorizedJobs.Applied.length} </div>
+            <div>Interview: {state.categorizedJobs.Interview.length} </div>
+            <div>Offer: {state.categorizedJobs.Offer.length} </div>
+            <div>Refused: {state.categorizedJobs.Refused.length}</div>
         </div>
     );
 };

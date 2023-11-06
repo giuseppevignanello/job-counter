@@ -1,7 +1,5 @@
 export enum ActionType {
-    JOBCOUNTER = "jobCounter",
-    APPLIEDJOBCOUNTER = "appliedJobCounter",
-    INTERVIEWJOBCOUNTER = "interviewJobCounter",
-    OFFERJOBCOUNTER = "offerJobCounter",
-    REFUSEDJOBCOUNTER = "refusedJobCounter",
+    JOBS = "jobs",
+    CATEGORIES = "categories",
+    CATEGORIZEDJOBS = "categorizedJobs",
 }
