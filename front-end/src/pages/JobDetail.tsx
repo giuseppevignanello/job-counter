@@ -11,6 +11,8 @@ interface Job {
     title: string;
     company: string;
     descriprion: string;
+    url: string;
+    location: string;
 }
 
 const JobDetail = () => {
@@ -46,21 +48,38 @@ const JobDetail = () => {
     }, [apiUrl]);
 
     return (
-        <div>
+        <div className="container">
             <Link to={`/`}>
-                <button type="button" className="btn btn-secondary">
+                <button type="button" className="btn btn-secondary mt-3">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
-            {job.title}
-            <Link to={`/edit/${id}`}>
-                <button type="button" className="btn btn-secondary">
-                    Edit
+            <div className="card w-50 m-auto p-3">
+                <h3>{job.title}</h3>
+                <p>{job.company}</p>
+                <p>
+                    {job.description} <br />
+                    {job.location}
+                </p>
+
+                <a href={job.url} target="_blank">
+                    Link
+                </a>
+            </div>
+            <div className="buttons d-flex gap-3 justify-content-center mt-3">
+                <Link to={`/edit/${id}`}>
+                    <button type="button" className="btn btn-secondary">
+                        Edit
+                    </button>
+                </Link>
+                <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={destroy}
+                >
+                    Delete
                 </button>
-            </Link>
-            <button type="button" className="btn btn-danger" onClick={destroy}>
-                Delete
-            </button>
+            </div>
         </div>
     );
 };
