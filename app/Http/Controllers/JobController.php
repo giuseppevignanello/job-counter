@@ -16,14 +16,14 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::orderBy('time', 'desc')->get();
         return response()->json($jobs);
     }
 
     public function jobsByCategory(Request $request)
     {
         $categoryId = $request->route('category_id');
-        $jobs = Job::where('category_id', $categoryId)->get();
+        $jobs = Job::where('category_id', $categoryId)->orderBy('time', 'desc')->get();
 
         return response()->json($jobs);
     }
