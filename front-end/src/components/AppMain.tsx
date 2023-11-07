@@ -50,11 +50,6 @@ const AppMain = () => {
                 console.error("Error", error);
             });
 
-        dispatch({
-            type: ActionType.JOBS,
-            payload: jobs,
-        });
-
         axios.get(apiUrlCategories).then((response) => {
             const fetchedCategories = response.data;
             setCategories(fetchedCategories);
@@ -66,6 +61,11 @@ const AppMain = () => {
         categorizedJobs[category.name] = jobs.filter(
             (job) => job.category_id === category.id
         );
+    });
+
+    dispatch({
+        type: ActionType.JOBS,
+        payload: jobs,
     });
 
     dispatch({

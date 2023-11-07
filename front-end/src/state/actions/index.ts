@@ -8,7 +8,7 @@ export interface Job {
 }
 interface JobsAction {
     type: ActionType.JOBS;
-    payload: Record<string, Job[]>;
+    payload: Array<String>;
 }
 
 interface CategoriesAction {
