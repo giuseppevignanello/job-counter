@@ -21,4 +21,13 @@ interface CategorizedJobsAction {
     payload: Record<string, Job[]>;
 }
 
-export type Action = JobsAction | CategoriesAction | CategorizedJobsAction;
+interface Search {
+    type: ActionType.SEARCH;
+    payload: string;
+}
+
+export type Action =
+    | JobsAction
+    | CategoriesAction
+    | CategorizedJobsAction
+    | Search;

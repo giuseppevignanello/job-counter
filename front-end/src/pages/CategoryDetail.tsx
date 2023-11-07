@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { State } from "../state";
 
 interface Job {
     id: number;
@@ -19,6 +21,7 @@ interface Category {
 }
 
 const CategoryDetail = () => {
+    const state = useSelector((state: State) => state.search);
     const { id } = useParams();
     const [category, setCategory] = useState<Category>();
     const [categoryJobs, setCategoryJobs] = useState<Job[]>([]);
@@ -39,6 +42,16 @@ const CategoryDetail = () => {
                 console.error("Errore nella richiesta API", error);
             });
     }, []);
+
+    const filteredJobs = state
+        ? categoryJobs.filter(
+              (job) =>
+                  job.title
+                      .toLowerCase()
+                      .includes(state.search.toLowerCase()) ||
+                  job.company.toLowerCase().includes(state.search.toLowerCase())
+          )
+        : categoryJobs;
     return (
         <div className="container">
             <Link to={`/`}>
@@ -49,9 +62,9 @@ const CategoryDetail = () => {
             <h2 className="mt-4 text-center bg_main py-2">
                 {category?.name} Jobs
             </h2>
-            {categoryJobs.length > 0 ? (
+            {filteredJobs.length > 0 ? (
                 <div className="mb-4">
-                    {categoryJobs.map((job) => (
+                    {filteredJobs.map((job) => (
                         <div className="box" key={job.id}>
                             {job.title} - {job.company}
                         </div>

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
-import { actions } from "../state/actions/index";
 import { ActionType } from "../state/action-types";
 import CategoryDetail from "../pages/CategoryDetail";
+import { useSelector } from "react-redux";
+import { State } from "../state";
 
 interface Job {
     id: number;
@@ -20,6 +21,7 @@ interface Category {
 }
 
 const AppMain = () => {
+    const state = useSelector((state: State) => state.search);
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
@@ -28,7 +30,7 @@ const AppMain = () => {
     );
 
     const [jobs, setJobs] = useState<Job[]>([]);
-    const [categories, setCategories] = useState<Job[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const dispatch = useDispatch();
 
@@ -55,18 +57,30 @@ const AppMain = () => {
             const fetchedCategories = response.data;
             setCategories(fetchedCategories);
         });
+        dispatch({
+            type: ActionType.JOBS,
+            payload: jobs,
+        });
     }, [apiUrl]);
 
     const categorizedJobs: CategorizedJobs = {};
     categories.forEach((category) => {
-        categorizedJobs[category.name] = jobs.filter(
-            (job) => job.category_id === category.id
-        );
-    });
-
-    dispatch({
-        type: ActionType.JOBS,
-        payload: jobs,
+        if (state.search) {
+            categorizedJobs[category.name] = jobs.filter(
+                (job) =>
+                    job.category_id === category.id &&
+                    (job.title
+                        .toLowerCase()
+                        .includes(state.search.toLowerCase()) ||
+                        job.company
+                            .toLowerCase()
+                            .includes(state.search.toLowerCase()))
+            );
+        } else {
+            categorizedJobs[category.name] = jobs.filter(
+                (job) => job.category_id === category.id
+            );
+        }
     });
 
     dispatch({
