@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { actions } from "../state/actions/index";
 import { ActionType } from "../state/action-types";
+import CategoryDetail from "../pages/CategoryDetail";
 
 interface Job {
     id: number;
@@ -79,36 +80,52 @@ const AppMain = () => {
                 className="row row-cols-sm-1 row-cols-md-3
        justify-content-between mt-3"
             >
-                {Object.keys(categorizedJobs).map((categoryName) => (
-                    <div className="box mt-3" key={categoryName}>
-                        <h4 className="text-center box_title">
-                            {categoryName}
-                        </h4>
-                        <ul className="list-unstyled box-content">
-                            {categorizedJobs[categoryName].map((job, index) => (
-                                <Link
-                                    className="text-dark text-decoration-none"
-                                    to={`/job_detail/${job.id}`}
-                                    key={job.id}
-                                >
-                                    <li className="box_item d-flex justify-content-between">
-                                        <div>
-                                            <p className="job_title">
-                                                {job.title}
-                                            </p>
-                                            <span className="job_company">
-                                                {job.company}
-                                            </span>
-                                        </div>
-                                        <div className="d-flex align-items-end">
-                                            <p>{formatDate(job.time)}</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {Object.keys(categorizedJobs).map(
+                    (categoryName, categoryId) => (
+                        <div key={categoryName}>
+                            <Link
+                                className="text-black text-decoration-none"
+                                to={`/category_detail/${categoryId + 1}`}
+                                key={categoryId + 1}
+                            >
+                                <h4 className="text-center box_title bg_main py-2 p-1">
+                                    {categoryName}
+                                </h4>
+                            </Link>
+                            <div>
+                                <ul className="list-unstyled box-content px-2">
+                                    {categorizedJobs[categoryName].map(
+                                        (job, index) => (
+                                            <Link
+                                                className="text-dark text-decoration-none"
+                                                to={`/job_detail/${job.id}`}
+                                                key={job.id}
+                                            >
+                                                <li className="box_item d-flex justify-content-between">
+                                                    <div>
+                                                        <p className="job_title">
+                                                            {job.title}
+                                                        </p>
+                                                        <span className="job_company">
+                                                            {job.company}
+                                                        </span>
+                                                    </div>
+                                                    <div className="d-flex align-items-end">
+                                                        <p>
+                                                            {formatDate(
+                                                                job.time
+                                                            )}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </Link>
+                                        )
+                                    )}
+                                </ul>
+                            </div>
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );

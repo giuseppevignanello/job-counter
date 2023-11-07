@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
+use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -18,6 +19,15 @@ class JobController extends Controller
         $jobs = Job::all();
         return response()->json($jobs);
     }
+
+    public function jobsByCategory(Request $request)
+    {
+        $categoryId = $request->route('category_id');
+        $jobs = Job::where('category_id', $categoryId)->get();
+
+        return response()->json($jobs);
+    }
+
 
     /**
      * Show the form for creating a new resource.

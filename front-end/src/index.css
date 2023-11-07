@@ -8,7 +8,7 @@ body {
 }
 
 :root {
-    --secondary-color: #d9f0fe;
+    --main-color: #d9f0fe;
 
     --background-light: #fafafa;
     --background-gray: #f3f5f8;
@@ -32,6 +32,10 @@ body {
 
 ::-webkit-scrollbar-track {
     background-color: #f0f0f0;
+}
+
+.bg_main {
+    background-color: var(--main-color);
 }
 
 .wrapper {
@@ -89,8 +93,11 @@ body {
 }
 
 .box-content {
-    max-height: 110px;
+    height: 180px;
     overflow-y: scroll;
+    border-left: 1px solid rgb(158, 158, 158);
+    border-right: 1px solid rgb(158, 158, 158);
+    border-bottom: 1px solid rgb(158, 158, 158);
 }
 
 .job_title {

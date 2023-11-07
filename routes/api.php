@@ -26,4 +26,5 @@ Route::get('/jobs/{job}', [JobController::class, 'show']);
 Route::put('/jobs/{job}', [JobController::class, 'update']);
 Route::delete('/jobs/{job}', [JobController::class, 'delete']);
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{cateogry}', [CategoryController::class, 'show']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+Route::get('/jobs-by-category/{category_id}', [JobController::class, "jobsByCategory"]);
