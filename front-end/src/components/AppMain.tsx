@@ -36,8 +36,7 @@ const AppMain = () => {
 
     function formatDate(timeString: string) {
         const date = new Date(timeString);
-        const options = { day: "numeric", month: "short" };
-        return date.toLocaleDateString(undefined, options);
+        return date.toLocaleDateString(undefined);
     }
 
     type CategorizedJobs = Record<string, Job[]>;
@@ -56,10 +55,6 @@ const AppMain = () => {
         axios.get(apiUrlCategories).then((response) => {
             const fetchedCategories = response.data;
             setCategories(fetchedCategories);
-        });
-        dispatch({
-            type: ActionType.JOBS,
-            payload: jobs,
         });
     }, [apiUrl]);
 
@@ -81,6 +76,11 @@ const AppMain = () => {
                 (job) => job.category_id === category.id
             );
         }
+    });
+
+    dispatch({
+        type: ActionType.JOBS,
+        payload: jobs,
     });
 
     dispatch({

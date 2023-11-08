@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AppHeader from "./components/AppHeader";
 import AppMain from "./components/AppMain";
 import JobDetail from "./pages/JobDetail";
@@ -6,6 +6,7 @@ import Create from "./pages/Create";
 import Edit from "./pages/Edit";
 import SideBar from "./components/SideBar";
 import CategoryDetail from "./pages/CategoryDetail";
+import TargetApp from "./pages/TargetApp";
 
 function App() {
     return (
@@ -28,9 +29,16 @@ function App() {
                                 />
                                 <Route path="create" element={<Create />} />
                                 <Route path="edit/:id" element={<Edit />} />
+
+                                <Route path="target" element={<TargetApp />} />
                             </Route>
                         </Routes>
                     </div>
+                    <Link to="/target">
+                        <div className="target">
+                            <img src="/target.png" alt="" />
+                        </div>
+                    </Link>
                 </div>
             </div>
         </BrowserRouter>
