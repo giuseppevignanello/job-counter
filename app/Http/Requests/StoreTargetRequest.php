@@ -26,6 +26,7 @@ class StoreTargetRequest extends FormRequest
         return [
             'name' => 'required',
             'deadline' => 'required',
+            "target" => "required",
             'motivationalDescription' => 'nullable',
         ];
     }

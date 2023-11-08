@@ -11,8 +11,18 @@ class Target extends Model
 
     protected $fillable = [
         'name',
-        'jobsNumber',
+        'target',
         'deadline',
         'motivationalDescription'
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
+    public function getJobCounterAttribute()
+    {
+        return $this->jobs()->count();
+    }
 }

@@ -51,12 +51,14 @@ const AppMain = () => {
             .catch((error) => {
                 console.error("Error", error);
             });
+    }, [apiUrl]);
 
+    useEffect(() => {
         axios.get(apiUrlCategories).then((response) => {
             const fetchedCategories = response.data;
             setCategories(fetchedCategories);
         });
-    }, [apiUrl]);
+    }, [apiUrlCategories]);
 
     const categorizedJobs: CategorizedJobs = {};
     categories.forEach((category) => {
@@ -77,15 +79,16 @@ const AppMain = () => {
             );
         }
     });
+    useEffect(() => {
+        dispatch({
+            type: ActionType.JOBS,
+            payload: jobs,
+        });
 
-    dispatch({
-        type: ActionType.JOBS,
-        payload: jobs,
-    });
-
-    dispatch({
-        type: ActionType.CATEGORIZEDJOBS,
-        payload: categorizedJobs,
+        dispatch({
+            type: ActionType.CATEGORIZEDJOBS,
+            payload: categorizedJobs,
+        });
     });
 
     return (
