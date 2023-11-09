@@ -35,7 +35,7 @@ const AppHeader = () => {
                 </div>
                 <div className="buttons me-2">
                     <div>
-                        <button type="button" className="btn-primary btn">
+                        <button type="button" className="bg_accent myBtn">
                             <Link
                                 className="text-white text-decoration-none"
                                 to={`/create`}

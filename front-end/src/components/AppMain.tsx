@@ -99,7 +99,7 @@ const AppMain = () => {
             >
                 {Object.keys(categorizedJobs).map(
                     (categoryName, categoryId) => (
-                        <div key={categoryName}>
+                        <div key={categoryName} className="box">
                             <Link
                                 className="text-black text-decoration-none"
                                 to={`/category_detail/${categoryId + 1}`}

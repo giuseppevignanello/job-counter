@@ -66,21 +66,10 @@ const TargetApp = () => {
             });
     }, [apiUrlTarget]);
 
-    // const progress = "";
-    // const progressBar = document.querySelector(
-    //     ".bar > .progress"
-    // ) as HTMLElement;
-
-    // if (progressBar) {
-    //     progressBar.style.width = `${progress}%`;
-    // } else {
-    //     console.error("Element '.bar > .progress' non trovato.");
-    // }
-
     return (
         <div className="container mt-4">
             <Link to={`/`}>
-                <button type="button" className="btn btn-secondary">
+                <button type="button" className="myBtn bg_accent2 text-white">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
@@ -175,7 +164,7 @@ const TargetApp = () => {
                         </label>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="myBtn bg_accent text-white">
                     Add
                 </button>
             </form>

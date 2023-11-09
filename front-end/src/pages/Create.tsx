@@ -80,7 +80,7 @@ const Create = () => {
     return (
         <div className="container mt-4">
             <Link to={`/`}>
-                <button type="button" className="btn btn-secondary">
+                <button type="button" className="myBtn bg_accent2 text-white">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
@@ -172,7 +172,7 @@ const Create = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="myBtn bg_accent text-white">
                     Add
                 </button>
             </form>

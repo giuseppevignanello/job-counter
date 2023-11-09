@@ -3,7 +3,7 @@ body {
 }
 
 #root {
-    background-color: #d9f0fe;
+    background-color: var(--main-color);
     height: 100vh;
 }
 
@@ -17,8 +17,8 @@ body {
     --text-light: #fff;
     --text-dark: #333;
 
-    --accent-color-1: #00b894;
-    --accent-color-2: #fca130;
+    --accent-color-1: #fca130;
+    --accent-color-2: #00b894;
 }
 
 ::-webkit-scrollbar {
@@ -36,6 +36,23 @@ body {
 
 .bg_main {
     background-color: var(--main-color);
+}
+
+.bg_accent {
+    background-color: var(--accent-color-1);
+}
+
+.bg_accent2 {
+    background-color: var(--accent-color-2);
+}
+.myBtn {
+    border: 0;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    font-size: 16px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-radius: 10px;
 }
 
 .wrapper {
@@ -77,8 +94,8 @@ body {
 }
 
 .box {
-    border: 1px solid rgb(158, 158, 158);
     padding: 1rem;
+    height: 50%;
 }
 
 .box_title,

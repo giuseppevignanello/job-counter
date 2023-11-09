@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 const Create = () => {
@@ -91,6 +94,14 @@ const Create = () => {
 
     return (
         <div className="container mt-4">
+            <Link to={`/`}>
+                <button
+                    type="button"
+                    className="myBtn bg_accent2 text-white mt-3"
+                >
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+            </Link>
             <form onSubmit={send}>
                 <div className="mb-3">
                     <div>
@@ -179,7 +190,7 @@ const Create = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="myBtn bg_accent text-white">
                     Add
                 </button>
             </form>

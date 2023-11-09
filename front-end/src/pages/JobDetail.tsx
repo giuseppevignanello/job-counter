@@ -51,7 +51,10 @@ const JobDetail = () => {
     return (
         <div className="container">
             <Link to={`/`}>
-                <button type="button" className="btn btn-secondary mt-3">
+                <button
+                    type="button"
+                    className="myBtn bg_accent2 text-white mt-3"
+                >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
@@ -69,7 +72,10 @@ const JobDetail = () => {
             </div>
             <div className="buttons d-flex gap-3 justify-content-center mt-3">
                 <Link to={`/edit/${id}`}>
-                    <button type="button" className="btn btn-secondary">
+                    <button
+                        type="button"
+                        className="myBtn bg_accent text-white"
+                    >
                         Edit
                     </button>
                 </Link>

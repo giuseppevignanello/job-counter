@@ -55,7 +55,10 @@ const CategoryDetail = () => {
     return (
         <div className="container">
             <Link to={`/`}>
-                <button type="button" className="btn btn-secondary mt-3">
+                <button
+                    type="button"
+                    className="myBtn bg_accent2 mt-3 text-white"
+                >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
