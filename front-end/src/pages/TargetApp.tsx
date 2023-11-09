@@ -109,65 +109,70 @@ const TargetApp = () => {
                     </div>
                 )}
             </div>
-
-            <form onSubmit={send}>
-                <div className="mb-3">
-                    <div>
-                        <label>
-                            {"Name"}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="name"
-                                aria-describedby="helpId"
-                                value={FormData.name}
-                                onChange={handleChange}
-                            />
-                        </label>
+            <div>
+                <h4>Set a new Target</h4>
+                <form onSubmit={send}>
+                    <div className="mb-3">
+                        <div>
+                            <label>
+                                {"Name"}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    aria-describedby="helpId"
+                                    value={FormData.name}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                {"MotivationalDescription"}
+                                <textarea
+                                    className="form-control"
+                                    name="motivationalDescription"
+                                    aria-describedby="helpId"
+                                    value={FormData.motivationalDescription}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                {"Target"}
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="target"
+                                    aria-describedby="helpId"
+                                    value={FormData.target}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                {"Deadline"}
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    name="deadline"
+                                    aria-describedby="helpId"
+                                    value={FormData.deadline}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
                     </div>
-                    <div>
-                        <label>
-                            {"MotivationalDescription"}
-                            <textarea
-                                className="form-control"
-                                name="motivationalDescription"
-                                aria-describedby="helpId"
-                                value={FormData.motivationalDescription}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            {"Target"}
-                            <input
-                                type="number"
-                                className="form-control"
-                                name="target"
-                                aria-describedby="helpId"
-                                value={FormData.target}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            {"Deadline"}
-                            <input
-                                type="date"
-                                className="form-control"
-                                name="deadline"
-                                aria-describedby="helpId"
-                                value={FormData.deadline}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" className="myBtn bg_accent text-white">
-                    Add
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="myBtn bg_accent text-white"
+                    >
+                        Add
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -95,7 +95,7 @@ const AppMain = () => {
         <div className="container">
             <div
                 className="row row-cols-sm-1 row-cols-md-3
-       justify-content-between mt-3"
+       justify-content-between mt-3 mx-5"
             >
                 {Object.keys(categorizedJobs).map(
                     (categoryName, categoryId) => (
