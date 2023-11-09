@@ -93,13 +93,19 @@ const AppMain = () => {
 
     return (
         <div className="container">
-            <div
-                className="row row-cols-sm-1 row-cols-md-3
-       justify-content-between mt-3 mx-5"
-            >
+            <div className="grid-container">
                 {Object.keys(categorizedJobs).map(
                     (categoryName, categoryId) => (
-                        <div key={categoryName} className="box">
+                        <div
+                            key={categoryName}
+                            className={`box ${
+                                categoryId === 1
+                                    ? "applied"
+                                    : categoryId === 1
+                                    ? "left"
+                                    : "right"
+                            }`}
+                        >
                             <Link
                                 className="text-black text-decoration-none"
                                 to={`/category_detail/${categoryId + 1}`}

@@ -55,6 +55,29 @@ body {
     border-radius: 10px;
 }
 
+@media screen and (min-width: 768px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .applied {
+        grid-row: span 3;
+    }
+
+    .applied .box-content {
+        height: 465px;
+    }
+
+    .left {
+        grid-row: span 1;
+    }
+
+    .right {
+        grid-row: span 1;
+    }
+}
+
 .wrapper {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -65,8 +88,8 @@ body {
     left: 5%;
     right: 5%;
     bottom: 5%;
-    height: 90vh;
-    box-shadow: 0px 12px 19px 8px #9c9898;
+    height: calc(100vh - 90px);
+    box-shadow: 0px 18px 19px 8px #9c9898;
 }
 
 .appHeader {
@@ -81,7 +104,7 @@ body {
 }
 
 .main_section {
-    height: calc(100% - 90px);
+    height: calc(100% - 80px);
 }
 
 .sidebar {
@@ -103,7 +126,6 @@ body {
 
 .box {
     padding: 1rem;
-    height: 70%;
 }
 
 .box_title,
@@ -117,8 +139,8 @@ body {
 }
 
 .box-content {
-    height: 180px;
     overflow-y: scroll;
+    height: 180px;
     border-left: 1px solid rgb(158, 158, 158);
     border-right: 1px solid rgb(158, 158, 158);
     border-bottom: 1px solid rgb(158, 158, 158);
