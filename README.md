@@ -30,7 +30,7 @@
 4. **Configure the environment file:**
 
     - Copy the `.env.example` file and rename it to `.env`
-    - Modify the environment variables in the `.env` file according to your needs
+    - Modify the environment variables in the `.env` file according to your needs, including the database connection details (remembrer to create a database for this purpose) 
 
 5. **Generate Laravel application key:**
 
