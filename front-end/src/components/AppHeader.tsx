@@ -16,33 +16,40 @@ const AppHeader = () => {
 
     return (
         <div>
-            <header className="appHeader d-flex align-items-center justify-content-between bg-light">
-                <div>
-                    <form>
-                        <div className="my-3 ms-2">
+            <header className="appHeader bg-light">
+                <div className="container">
+                    <div className="d-flex align-items-center justify-content-around">
+                        <div>
+                            <form>
+                                <div className="my-3 ms-2">
+                                    <div>
+                                        <input
+                                            onChange={search}
+                                            type="text"
+                                            name=""
+                                            className="form-control"
+                                            aria-describedby="helpId"
+                                            placeholder="Search a job"
+                                        />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="buttons me-2">
                             <div>
-                                <input
-                                    onChange={search}
-                                    type="text"
-                                    name=""
-                                    className="form-control"
-                                    aria-describedby="helpId"
-                                    placeholder="Search a job"
-                                />
+                                <button
+                                    type="button"
+                                    className="bg_accent myBtn"
+                                >
+                                    <Link
+                                        className="text-white text-decoration-none"
+                                        to={`/create`}
+                                    >
+                                        Add
+                                    </Link>
+                                </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div className="buttons me-2">
-                    <div>
-                        <button type="button" className="bg_accent myBtn">
-                            <Link
-                                className="text-white text-decoration-none"
-                                to={`/create`}
-                            >
-                                Add
-                            </Link>
-                        </button>
                     </div>
                 </div>
             </header>

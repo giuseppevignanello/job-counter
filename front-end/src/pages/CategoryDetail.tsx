@@ -52,6 +52,11 @@ const CategoryDetail = () => {
                   job.company.toLowerCase().includes(state.search.toLowerCase())
           )
         : categoryJobs;
+
+    function formatDate(timeString: string) {
+        const date = new Date(timeString);
+        return date.toLocaleDateString(undefined);
+    }
     return (
         <div className="container">
             <Link to={`/`}>
@@ -65,17 +70,32 @@ const CategoryDetail = () => {
             <h2 className="mt-4 text-center bg_main py-2">
                 {category?.name} Jobs
             </h2>
-            {filteredJobs.length > 0 ? (
-                <div className="mb-4">
-                    {filteredJobs.map((job) => (
-                        <div className="box" key={job.id}>
-                            {job.title} - {job.company}
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <p> {category?.name} is empty</p>
-            )}
+            <div className="myContainer">
+                {filteredJobs.length > 0 ? (
+                    <div className="mb-4">
+                        {filteredJobs.map((job) => (
+                            <Link
+                                className="text-dark text-decoration-none"
+                                to={`/job_detail/${job.id}`}
+                            >
+                                <div className="box card my-2" key={job.id}>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            {job.title} <br />
+                                            {job.company}
+                                        </div>
+                                        <div className="align-self-end">
+                                            {formatDate(job.time)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <p> {category?.name} is empty</p>
+                )}
+            </div>
         </div>
     );
 };

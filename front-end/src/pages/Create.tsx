@@ -84,47 +84,87 @@ const Create = () => {
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </Link>
+
             <form onSubmit={send}>
-                <div className="mb-3">
-                    <div>
-                        <label>
-                            {"Title"}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="title"
-                                aria-describedby="helpId"
-                                value={FormData.title}
-                                onChange={handleChange}
-                            />
-                        </label>
+                <div className="mb-3 d-md-flex justify-content-center">
+                    <div className="w-50">
+                        <div>
+                            <label className="target_label my-2">
+                                {"Title"}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="title"
+                                    aria-describedby="helpId"
+                                    value={FormData.title}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="target_label my-2">
+                                {"Company"}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="company"
+                                    aria-describedby="helpId"
+                                    value={FormData.company}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="target_label my-2">
+                                {"Url"}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="url"
+                                    aria-describedby="helpId"
+                                    value={FormData.url}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="target_label my-2">
+                                {"Location"}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="location"
+                                    aria-describedby="helpId"
+                                    value={FormData.location}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="my-2">
+                                {"Select a category"}
+                            </label>
+                            <div className="mb-3">
+                                <select
+                                    className="form-select w-75 "
+                                    name="category_id"
+                                    value={FormData.category_id}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Select a category</option>
+                                    {categories.map((category) => (
+                                        <option
+                                            key={category.id}
+                                            value={category.id}
+                                        >
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label>
-                            {"Company"}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="company"
-                                aria-describedby="helpId"
-                                value={FormData.company}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            {"Url"}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="url"
-                                aria-describedby="helpId"
-                                value={FormData.url}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
+
                     <div>
                         <label>
                             {"Description"}
@@ -132,44 +172,12 @@ const Create = () => {
                                 className="form-control"
                                 name="description"
                                 aria-describedby="helpId"
+                                rows={15}
+                                cols={50}
                                 value={FormData.description}
                                 onChange={handleChange}
                             />
                         </label>
-                    </div>
-                    <div>
-                        <label>
-                            {"Location"}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="location"
-                                aria-describedby="helpId"
-                                value={FormData.location}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>{"Select a category"}</label>
-                        <div className="mb-3">
-                            <select
-                                className="form-select w-50"
-                                name="category_id"
-                                value={FormData.category_id}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select a category</option>
-                                {categories.map((category) => (
-                                    <option
-                                        key={category.id}
-                                        value={category.id}
-                                    >
-                                        {category.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <button type="submit" className="myBtn bg_accent text-white">

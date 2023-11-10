@@ -55,6 +55,11 @@ body {
     border-radius: 10px;
 }
 
+.myContainer {
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
 @media screen and (min-width: 768px) {
     .grid-container {
         display: grid;
@@ -88,8 +93,8 @@ body {
     left: 5%;
     right: 5%;
     bottom: 5%;
-    height: calc(100vh - 90px);
-    box-shadow: 0px 18px 19px 8px #9c9898;
+    height: calc(100vh - 14%);
+    box-shadow: 0px 30px 19px 8px #9c9898;
 }
 
 .appHeader {
@@ -104,7 +109,7 @@ body {
 }
 
 .main_section {
-    height: calc(100% - 80px);
+    height: calc(100% - 10%);
 }
 
 .sidebar {
@@ -126,16 +131,22 @@ body {
 
 .box {
     padding: 1rem;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
+.box_title {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
 .box_title,
 .box_item {
     border-bottom: 1px solid gray;
 }
 
 .box_item {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .box-content {
@@ -144,6 +155,8 @@ body {
     border-left: 1px solid rgb(158, 158, 158);
     border-right: 1px solid rgb(158, 158, 158);
     border-bottom: 1px solid rgb(158, 158, 158);
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .job_title {
@@ -194,4 +207,8 @@ body {
         inset 0 -2px 6px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
+}
+
+.target_label {
+    width: 90%;
 }
