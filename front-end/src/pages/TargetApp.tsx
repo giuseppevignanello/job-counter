@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ComeBackButton from "../components/ComeBackButton";
 import { State } from "../state";
 
 interface Target {
@@ -74,11 +75,7 @@ const TargetApp = () => {
 
     return (
         <div className="container mt-4">
-            <Link to={`/`}>
-                <button type="button" className="myBtn bg_accent2 text-white">
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-            </Link>
+            <ComeBackButton></ComeBackButton>
             <div>
                 {targets ? (
                     <div className="text-center">

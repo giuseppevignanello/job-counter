@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { State } from "../state";
+import ComeBackButton from "../components/ComeBackButton";
 
 interface Job {
     id: number;
@@ -58,15 +57,8 @@ const CategoryDetail = () => {
         return date.toLocaleDateString(undefined);
     }
     return (
-        <div className="container">
-            <Link to={`/`}>
-                <button
-                    type="button"
-                    className="myBtn bg_accent2 mt-3 text-white"
-                >
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-            </Link>
+        <div className="container mt-3">
+            <ComeBackButton></ComeBackButton>
             <h2 className="mt-4 text-center bg_main py-2">
                 {category?.name} Jobs
             </h2>

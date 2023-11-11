@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ComeBackButton from "../components/ComeBackButton";
 
 interface Job {
     id: number;
@@ -49,15 +48,8 @@ const JobDetail = () => {
     }, [apiUrl]);
 
     return (
-        <div className="container">
-            <Link to={`/`}>
-                <button
-                    type="button"
-                    className="myBtn bg_accent2 text-white mt-3"
-                >
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-            </Link>
+        <div className="container mt-2">
+            <ComeBackButton></ComeBackButton>
             <div className="card w-50 m-auto p-3">
                 <h3>{job.title}</h3>
                 <p>{job.company}</p>

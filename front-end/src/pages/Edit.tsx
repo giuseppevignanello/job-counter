@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import ComeBackButton from "../components/ComeBackButton";
 
 const Edit = () => {
     const [apiUrl, setApiUrl] = useState<string>(
@@ -94,11 +95,7 @@ const Edit = () => {
 
     return (
         <div className="container mt-4">
-            <Link to={`/`}>
-                <button type="button" className="myBtn bg_accent2 text-white">
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-            </Link>
+            <ComeBackButton></ComeBackButton>
 
             <form onSubmit={send}>
                 <div className="mb-3 d-md-flex justify-content-center">
