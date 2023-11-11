@@ -21,29 +21,22 @@ interface Category {
 }
 
 const AppMain = () => {
+    //state
     const state = useSelector((state: State) => state.search);
-    const [apiUrl, setApiUrl] = useState<string>(
-        "http://127.0.0.1:8000/api/jobs"
-    );
-    const [apiUrlCategories, setApiUrlCategories] = useState<string>(
-        "http://127.0.0.1:8000/api/categories"
-    );
-
-    const [jobs, setJobs] = useState<Job[]>([]);
-    const [categories, setCategories] = useState<Category[]>([]);
-
     const dispatch = useDispatch();
 
-    function formatDate(timeString: string) {
-        const date = new Date(timeString);
-        return date.toLocaleDateString(undefined);
-    }
+    //apiURL
+    const [apiUrl, setApiUrl] = useState<string>("http://127.0.0.1:8000/api");
+
+    //jobs and categories
+    const [jobs, setJobs] = useState<Job[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     type CategorizedJobs = Record<string, Job[]>;
 
     useEffect(() => {
         axios
-            .get(apiUrl)
+            .get(`${apiUrl}/jobs`)
             .then((response) => {
                 const fetchedJobs = response.data;
                 setJobs(fetchedJobs);
@@ -53,15 +46,18 @@ const AppMain = () => {
             });
     }, [apiUrl]);
 
+    //get the categories
     useEffect(() => {
-        axios.get(apiUrlCategories).then((response) => {
+        axios.get(`${apiUrl}/categories`).then((response) => {
             const fetchedCategories = response.data;
             setCategories(fetchedCategories);
         });
-    }, [apiUrlCategories]);
+    }, [`${apiUrl}/categories`]);
 
+    //putting the jobs into each category
     const categorizedJobs: CategorizedJobs = {};
     categories.forEach((category) => {
+        //search function
         if (state.search) {
             categorizedJobs[category.name] = jobs.filter(
                 (job) =>
@@ -79,6 +75,8 @@ const AppMain = () => {
             );
         }
     });
+
+    //store jobs (all and by category)
     useEffect(() => {
         dispatch({
             type: ActionType.JOBS,
@@ -90,6 +88,12 @@ const AppMain = () => {
             payload: categorizedJobs,
         });
     });
+
+    //Format Date
+    function formatDate(timeString: string) {
+        const date = new Date(timeString);
+        return date.toLocaleDateString(undefined);
+    }
 
     return (
         <div className="container">
