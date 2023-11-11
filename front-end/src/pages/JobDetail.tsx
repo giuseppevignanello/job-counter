@@ -17,13 +17,12 @@ interface Job {
 const JobDetail = () => {
     const navigate = useNavigate();
 
-    const [apiUrl, setApiUrl] = useState<string>(
-        "http://127.0.0.1:8000/api/jobs"
-    );
+    const apiUrl = "http://127.0.0.1:8000/api/jobs";
 
     const [job, setJob] = useState<Job>(Object);
     const { id } = useParams<{ id: string }>();
 
+    //Delete Method
     function destroy() {
         axios
             .delete(`${apiUrl}/${id}`)

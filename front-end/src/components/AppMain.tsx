@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
-import CategoryDetail from "../pages/CategoryDetail";
 import { useSelector } from "react-redux";
 import { State } from "../state";
 

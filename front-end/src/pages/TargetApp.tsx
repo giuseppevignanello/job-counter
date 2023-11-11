@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ComeBackButton from "../components/ComeBackButton";
 import { State } from "../state";
 
@@ -16,9 +13,7 @@ interface Target {
 }
 const TargetApp = () => {
     const state = useSelector((state: State) => state.counter);
-    const [apiUrlTarget, setApiUrlTarget] = useState<string>(
-        "http://127.0.0.1:8000/api/target"
-    );
+    const apiUrlTarget = "http://127.0.0.1:8000/api/target";
     const [targets, setTargets] = useState<[]>([]);
     const [FormData, setFormData] = useState({
         name: "",
@@ -26,7 +21,6 @@ const TargetApp = () => {
         motivationalDescription: "",
         target: 0,
     });
-    const navigate = useNavigate();
 
     function handleChange(
         e: React.ChangeEvent<
@@ -67,7 +61,8 @@ const TargetApp = () => {
             });
     }, [apiUrlTarget]);
 
-    const formatDeadline = (date) => {
+    //Format Date
+    const formatDeadline = (date: Date) => {
         const formattedDate = new Date(date);
         const options = { month: "numeric", day: "numeric" };
         return formattedDate.toLocaleDateString(undefined, options);

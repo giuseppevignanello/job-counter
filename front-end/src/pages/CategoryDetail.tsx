@@ -20,28 +20,33 @@ interface Category {
 }
 
 const CategoryDetail = () => {
+    //state
     const state = useSelector((state: State) => state.search);
     const { id } = useParams();
+
+    //apiURL [I can take it from the store]
+    const apiCategoryUrl = "http://127.0.0.1:8000/api/categories";
+
+    //Category and jobs by category
     const [category, setCategory] = useState<Category>();
     const [categoryJobs, setCategoryJobs] = useState<Job[]>([]);
 
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/categories/${id}`)
-            .then((response) => {
-                setCategory(response.data);
-            });
+        axios.get(`${apiCategoryUrl}/${id}`).then((response) => {
+            setCategory(response.data);
+        });
 
         axios
-            .get(`http://127.0.0.1:8000/api/jobs-by-category/${id}`)
+            .get(`${apiCategoryUrl}/${id}`)
             .then((response) => {
                 setCategoryJobs(response.data);
             })
             .catch((error) => {
-                console.error("Errore nella richiesta API", error);
+                console.error("API request error", error);
             });
     }, []);
 
+    //filtered Jobs
     const filteredJobs = state
         ? categoryJobs.filter(
               (job) =>
@@ -52,10 +57,12 @@ const CategoryDetail = () => {
           )
         : categoryJobs;
 
+    //Format Date [could be a component]
     function formatDate(timeString: string) {
         const date = new Date(timeString);
         return date.toLocaleDateString(undefined);
     }
+
     return (
         <div className="container mt-3">
             <ComeBackButton></ComeBackButton>
