@@ -3,4 +3,5 @@ export enum ActionType {
     CATEGORIES = "categories",
     CATEGORIZEDJOBS = "categorizedJobs",
     SEARCH = "search",
+    MESSAGE = "message",
 }

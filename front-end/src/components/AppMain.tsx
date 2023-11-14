@@ -21,7 +21,10 @@ interface Category {
 
 const AppMain = () => {
     //state
-    const state = useSelector((state: State) => state.search);
+    const search = useSelector((state: State) => state.search);
+    const messageObject = useSelector((state: State) => state.message);
+    const message = messageObject.message;
+
     const dispatch = useDispatch();
 
     //apiURL
@@ -57,16 +60,16 @@ const AppMain = () => {
     const categorizedJobs: CategorizedJobs = {};
     categories.forEach((category) => {
         //search function
-        if (state.search) {
+        if (search.search) {
             categorizedJobs[category.name] = jobs.filter(
                 (job) =>
                     job.category_id === category.id &&
                     (job.title
                         .toLowerCase()
-                        .includes(state.search.toLowerCase()) ||
+                        .includes(search.search.toLowerCase()) ||
                         job.company
                             .toLowerCase()
-                            .includes(state.search.toLowerCase()))
+                            .includes(search.search.toLowerCase()))
             );
         } else {
             categorizedJobs[category.name] = jobs.filter(
@@ -96,6 +99,16 @@ const AppMain = () => {
 
     return (
         <div className="container">
+            <div>
+                {message && (
+                    <div className="alert alert-info" role="alert">
+                        <strong>
+                            <i className="fa-solid fa-thumbs-up"></i>
+                        </strong>{" "}
+                        {message}
+                    </div>
+                )}
+            </div>
             <div className="grid-container">
                 {Object.keys(categorizedJobs).map(
                     (categoryName, categoryId) => (

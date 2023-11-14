@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux/es/exports";
+import { ActionType } from "../state/action-types";
 import { Link, useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +9,7 @@ import axios from "axios";
 import ComeBackButton from "../components/ComeBackButton";
 
 const Edit = () => {
+    const dispatch = useDispatch();
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
@@ -83,9 +86,13 @@ const Edit = () => {
         e.preventDefault();
 
         axios
-            .put(`${apiUrl}/${id}`, FormData)
+            .post(apiUrl, FormData)
             .then((response) => {
-                console.log("Success: ", response.data);
+                const message = response.data.message;
+                dispatch({
+                    type: ActionType.MESSAGE,
+                    payload: message,
+                });
                 navigate("/");
             })
             .catch((error) => {

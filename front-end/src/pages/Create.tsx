@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux/es/exports";
+import { ActionType } from "../state/action-types";
 import { Link, useNavigate } from "react-router-dom";
 import ComeBackButton from "../components/ComeBackButton";
 
 const Create = () => {
+    const dispatch = useDispatch();
     const [apiUrl, setApiUrl] = useState<string>(
         "http://127.0.0.1:8000/api/jobs"
     );
@@ -63,12 +66,15 @@ const Create = () => {
     }
     function send(e: React.FormEvent) {
         e.preventDefault();
-        console.log(FormData);
 
         axios
             .post(apiUrl, FormData)
             .then((response) => {
-                console.log("Success: ", response.data);
+                const message = response.data.message;
+                dispatch({
+                    type: ActionType.MESSAGE,
+                    payload: message,
+                });
                 navigate("/");
             })
             .catch((error) => {

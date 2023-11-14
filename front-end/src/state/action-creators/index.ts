@@ -45,3 +45,12 @@ export const search = (search: string) => {
         });
     };
 };
+
+export const message = (message: string) => {
+    return (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.MESSAGE,
+            payload: message,
+        });
+    };
+};

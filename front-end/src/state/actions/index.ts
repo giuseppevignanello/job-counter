@@ -26,8 +26,14 @@ interface Search {
     payload: string;
 }
 
+interface Message {
+    type: ActionType.MESSAGE;
+    payload: string;
+}
+
 export type Action =
     | JobsAction
     | CategoriesAction
     | CategorizedJobsAction
-    | Search;
+    | Search
+    | Message;

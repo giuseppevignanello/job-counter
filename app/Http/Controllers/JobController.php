@@ -49,7 +49,7 @@ class JobController extends Controller
         $valData = $request->validated();
         $valData['category_id'] = $request->input('category_id');
         $job = Job::create($valData);
-        return response()->json($job);
+        return response()->json(['job' => $job, 'message' => 'Job Added Successfully']);
     }
 
     /**
@@ -88,7 +88,7 @@ class JobController extends Controller
         $valData = $request->validated();
         $valData['category_id'] = $request->input('category_id');
         $job->update($valData);
-        return response()->json($job);
+        return response()->json(['job' => $job, 'message' => 'Job Updated Successfully']);
     }
 
     /**
@@ -101,5 +101,6 @@ class JobController extends Controller
     {
         $job = Job::find($job->id);
         $job->delete();
+        return response()->json(['message' => 'Job deleted Successfully']);
     }
 }
