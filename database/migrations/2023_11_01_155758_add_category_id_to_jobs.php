@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-        });
+        // Schema::table('jobs', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('category_id');
+        //     $table->foreign('category_id')->references('id')->on('categories');
+        // });
     }
 
     public function down()
