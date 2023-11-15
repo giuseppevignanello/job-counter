@@ -71,11 +71,21 @@ const TargetApp = () => {
     return (
         <div className="container mt-4">
             <ComeBackButton></ComeBackButton>
+
             <div>
                 {targets ? (
                     <div className="text-center">
                         {targets.map((target, index) => (
-                            <div key={index}>
+                            <div className="position-relative" key={index}>
+                                <div
+                                    className={`completed ${
+                                        state.jobs.length >= target.target
+                                            ? ""
+                                            : "d-none"
+                                    }`}
+                                >
+                                    <img src="completed.png" alt="" />
+                                </div>
                                 <div className="card w-50 m-auto p-4 my-3">
                                     <h4>{target.name}</h4>
                                     <span>
@@ -94,9 +104,12 @@ const TargetApp = () => {
                                             className="progress"
                                             style={{
                                                 width: `${
-                                                    (state.jobs.length /
-                                                        target.target) *
-                                                    100
+                                                    state.jobs.length >=
+                                                    target.target
+                                                        ? 100
+                                                        : (state.jobs.length /
+                                                              target.target) *
+                                                          100
                                                 }%`,
                                             }}
                                         ></div>
