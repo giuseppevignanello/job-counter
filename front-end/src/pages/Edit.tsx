@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
-import { Link, useNavigate } from "react-router-dom";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import ComeBackButton from "../components/ComeBackButton";
 
 const Edit = () => {
@@ -16,8 +13,8 @@ const Edit = () => {
     const [apiCategoriesUrl, setApiCategoriesUrl] = useState<string>(
         "http://127.0.0.1:8000/api/categories"
     );
+
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
 
     interface Job {
         id: number;
@@ -53,60 +50,86 @@ const Edit = () => {
             .catch((error) => {
                 console.error("Error: ", error);
             });
-        axios
-            .get(`${apiUrl}/${id}`)
-            .then((response) => {
-                const existingData = response.data;
-
-                setFormData(existingData);
-            })
-            .catch((error) => {
-                console.error("Error fetching existing data: ", error);
-            });
-    }, [apiUrl, id]);
+    }, []);
 
     function handleChange(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
     ) {
-        const { name, value, type } = e.target;
-        if (type === "checkbox") {
-            const val = (e.target as HTMLInputElement).checked;
-            setFormData({
-                ...FormData,
-                [name]: val,
-            });
-        } else {
-            setFormData({
-                ...FormData,
-                [name]: value,
-            });
-        }
+        const { name, value } = e.target;
+
+        setFormData({
+            ...FormData,
+            [name]: value,
+        });
     }
+
+    const [titleError, setTitleError] = useState("");
+    const [companyError, setCompanyError] = useState("");
+    const [urlError, setUrlError] = useState("");
+    const [locationError, setLocationError] = useState("");
+    const [categoryError, setCategoryError] = useState("");
+    const [descriptionError, setDescriptionError] = useState("");
+
     function send(e: React.FormEvent) {
         e.preventDefault();
 
-        axios
-            .post(apiUrl, FormData)
-            .then((response) => {
-                const message = response.data.message;
-                dispatch({
-                    type: ActionType.MESSAGE,
-                    payload: message,
+        //validation
+        let validator = true;
+        //title
+        if (FormData.title.length < 3 || FormData.title.length > 50) {
+            setTitleError("Title must be between 3 and 50 characters");
+            validator = false;
+        }
+        if (FormData.company.length < 3 || FormData.company.length > 50) {
+            setCompanyError("Company must be between 3 and 50 characters");
+            validator = false;
+        }
+        if (FormData.url.length < 3 || FormData.url.length > 150) {
+            setUrlError("Url must be between 3 and 150 characters");
+            validator = false;
+        }
+        if (FormData.location.length < 3 || FormData.location.length > 30) {
+            setLocationError("Location must be between 3 and 30 characters");
+            validator = false;
+        }
+        if (FormData.category_id == "") {
+            setCategoryError("Please select a category");
+            validator = false;
+        }
+
+        if (FormData.description.length > 500) {
+            setDescriptionError(
+                "Description must have less than 500 characters"
+            );
+            validator = false;
+        }
+
+        if (validator) {
+            axios
+                .post(apiUrl, FormData)
+                .then((response) => {
+                    const message = response.data.message;
+                    dispatch({
+                        type: ActionType.MESSAGE,
+                        payload: message,
+                    });
+                    navigate("/");
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
                 });
-                navigate("/");
-            })
-            .catch((error) => {
-                console.error("Error: ", error);
-            });
+        }
     }
 
     return (
         <div className="container mt-4">
             <ComeBackButton></ComeBackButton>
-
             <form onSubmit={send}>
                 <div className="mb-3 d-md-flex justify-content-center">
                     <div className="w-50">
+                        {/* title */}
                         <div>
                             <label className="target_label my-2">
                                 {"Title"}
@@ -120,6 +143,15 @@ const Edit = () => {
                                 />
                             </label>
                         </div>
+                        <span
+                            className={`${
+                                titleError ? "d-block" : "d-none"
+                            } badge bg-danger w-75`}
+                        >
+                            {titleError}
+                        </span>
+
+                        {/* company */}
                         <div>
                             <label className="target_label my-2">
                                 {"Company"}
@@ -133,6 +165,15 @@ const Edit = () => {
                                 />
                             </label>
                         </div>
+                        <span
+                            className={`${
+                                companyError ? "d-block" : "d-none"
+                            } badge bg-danger w-75`}
+                        >
+                            {companyError}
+                        </span>
+
+                        {/* url */}
                         <div>
                             <label className="target_label my-2">
                                 {"Url"}
@@ -146,6 +187,15 @@ const Edit = () => {
                                 />
                             </label>
                         </div>
+                        <span
+                            className={`${
+                                urlError ? "d-block" : "d-none"
+                            } badge bg-danger w-75`}
+                        >
+                            {urlError}
+                        </span>
+
+                        {/* Location */}
                         <div>
                             <label className="target_label my-2">
                                 {"Location"}
@@ -159,6 +209,15 @@ const Edit = () => {
                                 />
                             </label>
                         </div>
+                        <span
+                            className={`${
+                                locationError ? "d-block" : "d-none"
+                            } badge bg-danger w-75`}
+                        >
+                            {locationError}
+                        </span>
+
+                        {/* category */}
                         <div>
                             <label className="my-2">
                                 {"Select a category"}
@@ -182,8 +241,15 @@ const Edit = () => {
                                 </select>
                             </div>
                         </div>
+                        <span
+                            className={`${
+                                categoryError ? "d-block" : "d-none"
+                            } badge bg-danger w-75`}
+                        >
+                            {categoryError}
+                        </span>
                     </div>
-
+                    {/* description */}
                     <div>
                         <label>
                             {"Description"}
@@ -198,6 +264,13 @@ const Edit = () => {
                             />
                         </label>
                     </div>
+                    <span
+                        className={`${
+                            descriptionError ? "d-block" : "d-none"
+                        } badge bg-danger w-75`}
+                    >
+                        {descriptionError}
+                    </span>
                 </div>
                 <button type="submit" className="myBtn bg_accent text-white">
                     Add
