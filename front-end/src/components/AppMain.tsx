@@ -23,7 +23,11 @@ const AppMain = () => {
     //state
     const search = useSelector((state: State) => state.search);
     const messageObject = useSelector((state: State) => state.message);
-    const message = messageObject.message;
+    const [message, setMessage] = useState<string>(messageObject.message);
+
+    setTimeout(() => {
+        setMessage("");
+    }, 3000);
 
     const dispatch = useDispatch();
 
