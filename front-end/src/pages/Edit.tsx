@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ const Edit = () => {
     );
 
     const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
 
     interface Job {
         id: number;
@@ -49,6 +51,16 @@ const Edit = () => {
             })
             .catch((error) => {
                 console.error("Error: ", error);
+            });
+        axios
+            .get(`${apiUrl}/${id}`)
+            .then((response) => {
+                const existingData = response.data;
+
+                setFormData(existingData);
+            })
+            .catch((error) => {
+                console.error("Error fetching existing data: ", error);
             });
     }, []);
 
