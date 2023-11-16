@@ -12,10 +12,14 @@ import RegisterForm from "./pages/RegisterForm";
 import LoginForm from "./pages/LoginForm";
 
 const App: React.FC = () => {
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(() => {
+        const storedAuth = localStorage.getItem("isAuth");
+        return storedAuth ? JSON.parse(storedAuth) : false;
+    });
 
     const updateAuthStatus = (newAuthStatus: boolean) => {
         setIsAuth(newAuthStatus);
+        localStorage.setItem("isAuth", JSON.stringify(newAuthStatus));
     };
     return (
         <BrowserRouter>
