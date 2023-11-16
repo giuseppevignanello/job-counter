@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ComeBackButton from "../components/ComeBackButton";
 import { State } from "../state";
 
@@ -21,6 +22,7 @@ const TargetApp = () => {
         motivationalDescription: "",
         target: 0,
     });
+    const navigate = useNavigate();
 
     function handleChange(
         e: React.ChangeEvent<
