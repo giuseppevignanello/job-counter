@@ -20,19 +20,18 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 |
 */
 
-Route::post('/tokens/create', function (Request $request) {
-    $token = $request->user()->createToken($request->token_name);
 
-    return ['token' => $token->plainTextToken];
-});
 
 Route::post('register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 
-
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('user-profile', [AuthController::class, 'userProfile'])->name('user-profile');
 });
+
+// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::middleware([EnsureFrontendRequestsAreStateful::class])->group(function () {
     Route::get('/jobs', [JobController::class, 'index']);

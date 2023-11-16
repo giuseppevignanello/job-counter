@@ -39,16 +39,22 @@ class AuthController extends Controller
             $user = Auth::user();
             $user = Auth::user();
             if ($user instanceof User) {
-                return $user->createToken('token')->plainTextToken;
+                $token = $user->createToken('token')->plainTextToken;
+                $cookie = cookie('cookie_token', $token, 60 * 24);
+                return response(["token" => $token], Response::HTTP_OK)->withCookie($cookie);
             } else {
                 return response("Error: User not found");
             };
         } else {
-            return response("Errore:. Invalid credentials");
+            return response(["message" => "Invalid Credentials"], Response::HTTP_UNAUTHORIZED);
         }
     }
     public function userProfile(Request $request)
     {
+        return response()->json([
+            "message" => "UserProfile Ok",
+            "userData" => auth()->user()
+        ], Response::HTTP_OK);
     }
     public function logout()
     {
