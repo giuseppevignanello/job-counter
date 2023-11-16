@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -58,5 +59,7 @@ class AuthController extends Controller
     }
     public function logout()
     {
+        $cookie = Cookie::forget('cookie_token');
+        return response(['message' => "Logout OK"], Response::HTTP_OK)->withCookie($cookie);
     }
 }
