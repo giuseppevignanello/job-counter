@@ -70,13 +70,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
         }
 
         if (validator) {
-            axios.post(registerApiUrl, formData).then((response) => {
-                const token = response.data.token;
-                axios.defaults.headers.common[
-                    "Authorization"
-                ] = `Bearer ${token}`;
-                updateAuthStatus(true);
-                navigate("/");
+            axios.post(registerApiUrl, formData).then(() => {
+                navigate("/login");
             });
         }
     };

@@ -17,14 +17,10 @@ class JobController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            $jobs = Job::where('user_id', $user->id)->orderBy('time', 'desc')->get();
-            return response()->json($jobs);
-        } else {
 
-            return response()->json(['error' => 'Unauthenticated'], 401);
-        }
+        $user = Auth::user();
+        $jobs = Job::where('user_id', $user->id)->orderBy('time', 'desc')->get();
+        return response()->json($jobs);
     }
 
     //continue: show, create and update only with connection to the user

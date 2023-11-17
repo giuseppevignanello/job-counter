@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import AppHeader from "./components/AppHeader";
 import AppMain from "./components/AppMain";
 import JobDetail from "./pages/JobDetail";
@@ -13,14 +14,25 @@ import LoginForm from "./pages/LoginForm";
 
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState(() => {
-        const storedAuth = localStorage.getItem("isAuth");
-        return storedAuth ? JSON.parse(storedAuth) : false;
+        const storedToken = localStorage.getItem("authToken");
+        const isAuthenticated = storedToken !== null;
+        return isAuthenticated;
     });
 
     const updateAuthStatus = (newAuthStatus: boolean) => {
         setIsAuth(newAuthStatus);
-        localStorage.setItem("isAuth", JSON.stringify(newAuthStatus));
+        if (!newAuthStatus) {
+            localStorage.removeItem("authToken");
+        }
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            updateAuthStatus(true);
+        }
+    }, []);
     return (
         <BrowserRouter>
             {!isAuth ? (
