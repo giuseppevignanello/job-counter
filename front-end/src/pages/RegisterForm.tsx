@@ -32,13 +32,49 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
         }));
     };
 
+    const [nameError, setNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [repeatPasswordError, setRepeatPasswordError] = useState("");
+
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        axios.post(registerApiUrl, formData).then(() => {
-            updateAuthStatus(true);
-            navigate("/");
-        });
+        //validation
+        let validator = true;
+        if (formData.name.length < 3 || formData.name.length > 25) {
+            setNameError("Username must be between 3 and 25 characters");
+            validator = false;
+        }
+        //email validation
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(formData.email)) {
+            validator = false;
+            setEmailError("Please insert a valid mail");
+        }
+
+        //password validation
+        const passwordPattern =
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!?']).{8,}$/;
+
+        if (!passwordPattern.test(formData.password)) {
+            validator = false;
+            setPasswordError(
+                "Your password should be at least 8 characters and must include at least one UpperCase, one number and one special character"
+            );
+        }
+
+        if (formData.password != formData.password_confirmation) {
+            validator = false;
+            setRepeatPasswordError("The two passwords do not match");
+        }
+
+        if (validator) {
+            axios.post(registerApiUrl, formData).then(() => {
+                updateAuthStatus(true);
+                navigate("/");
+            });
+        }
     };
 
     return (
@@ -60,6 +96,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
                             required
                         />
                     </label>
+                    <div
+                        className={`${
+                            nameError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {nameError}
+                    </div>
                     <br />
 
                     <label className="d-flex flex-column">
@@ -73,6 +116,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
                             required
                         />
                     </label>
+                    <div
+                        className={`${
+                            emailError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {emailError}
+                    </div>
                     <br />
 
                     <label className="d-flex flex-column">
@@ -86,6 +136,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
                             required
                         />
                     </label>
+                    <div
+                        className={`${
+                            passwordError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {passwordError}
+                    </div>
                     <br />
                     <label className="d-flex flex-column">
                         <div className="text-center">Repeat Password: </div>
@@ -98,6 +155,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
                             required
                         />
                     </label>
+                    <div
+                        className={`${
+                            repeatPasswordError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {repeatPasswordError}
+                    </div>
                     <br />
 
                     <button className="btn btn-dark w-75 m-auto" type="submit">
