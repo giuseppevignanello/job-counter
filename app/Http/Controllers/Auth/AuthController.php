@@ -38,10 +38,12 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => "required|email",
+            'password' => "required|min:8|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&'])/",
         ], [
             'email.email' => 'The email must be a valid email address.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one number, and one special character.',
+            'password.min' => 'The password must be at least 8 characters.',
         ]);
 
         if (Auth::attempt($credentials)) {
