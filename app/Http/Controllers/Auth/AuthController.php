@@ -16,9 +16,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|between:3,25',
             'email' => 'required|email',
-            'password' => 'required|confirmed'
+            'password' => "required|min:8|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&'])/|confirmed"
+        ], [
+            'name.between' => 'The name field must be between 3 and 25 characters.',
+            'email.email' => 'The email must be a valid email address.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one number, and one special character.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.confirmed' => 'The password confirmation does not match.'
         ]);
 
         $user = new User();
@@ -34,6 +40,8 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.email' => 'The email must be a valid email address.',
         ]);
 
         if (Auth::attempt($credentials)) {
