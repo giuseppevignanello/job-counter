@@ -51,7 +51,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
         }
 
         if (validator) {
-            axios.post(loginApiUrl, formData).then(() => {
+            axios.post(loginApiUrl, formData).then((response) => {
+                const token = response.data.token;
+                console.log(token);
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${token}`;
                 updateAuthStatus(true);
                 navigate("/");
             });

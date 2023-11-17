@@ -86,8 +86,8 @@ const Create = () => {
             setCompanyError("Company must be between 3 and 50 characters");
             validator = false;
         }
-        if (FormData.url.length < 3 || FormData.url.length > 150) {
-            setUrlError("Url must be between 3 and 150 characters");
+        if (FormData.url.length < 3 || FormData.url.length > 300) {
+            setUrlError("Url must be between 3 and 300 characters");
             validator = false;
         }
         if (FormData.location.length < 3 || FormData.location.length > 30) {
