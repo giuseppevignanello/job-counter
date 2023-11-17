@@ -120,7 +120,7 @@ const Edit = () => {
 
         if (validator) {
             axios
-                .put(apiUrl, FormData)
+                .put(`${apiUrl}/${id}`, FormData)
                 .then((response) => {
                     const message = response.data.message;
                     dispatch({
