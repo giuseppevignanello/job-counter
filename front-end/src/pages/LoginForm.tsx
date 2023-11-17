@@ -18,6 +18,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
         password: "",
     });
 
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -27,10 +30,32 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
     };
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        axios.post(loginApiUrl, formData).then(() => {
-            updateAuthStatus(true);
-            navigate("/");
-        });
+        let validator = true;
+
+        //email validation
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(formData.email)) {
+            validator = false;
+            setEmailError("Please insert a valid mail");
+        }
+
+        //password validation
+        const passwordPattern =
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!?']).{8,}$/;
+
+        if (!passwordPattern.test(formData.password)) {
+            validator = false;
+            setPasswordError(
+                "Your password should be at least 8 characters and must include at least one UpperCase, one number and one special character"
+            );
+        }
+
+        if (validator) {
+            axios.post(loginApiUrl, formData).then(() => {
+                updateAuthStatus(true);
+                navigate("/");
+            });
+        }
     };
 
     return (
@@ -52,6 +77,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
                             required
                         />
                     </label>
+                    <div
+                        className={`${
+                            emailError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {emailError}
+                    </div>
                     <br />
 
                     <label className="d-flex flex-column">
@@ -66,6 +98,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
                         />
                     </label>
                     <br />
+                    <div
+                        className={`${
+                            passwordError ? "d-block" : "d-none"
+                        } badge bg-danger w-75 m-auto mt-2`}
+                    >
+                        {passwordError}
+                    </div>
 
                     <button className="btn btn-dark w-75 m-auto" type="submit">
                         Login
