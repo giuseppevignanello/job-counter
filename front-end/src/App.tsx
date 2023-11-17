@@ -31,7 +31,12 @@ const App: React.FC = () => {
                             <RegisterForm updateAuthStatus={updateAuthStatus} />
                         }
                     />
-                    <Route path="/login" element={<LoginForm />} />
+                    <Route
+                        path="/login"
+                        element={
+                            <LoginForm updateAuthStatus={updateAuthStatus} />
+                        }
+                    />
                 </Routes>
             ) : (
                 <div className="wrapper">

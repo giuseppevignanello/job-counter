@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
-
-interface UserData {
-    username: string;
+import axios from "axios";
+interface LoginFormProps {
+    updateAuthStatus: (newAuthStatus: boolean) => void;
+}
+interface FormData {
     email: string;
     password: string;
 }
-function LoginForm() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
+const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
+    const navigate = useNavigate();
+    const loginApiUrl = "http://localhost:8000/api/login";
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        axios.post(loginApiUrl, formData).then(() => {
+            updateAuthStatus(true);
+            navigate("/");
+        });
     };
 
     return (
@@ -25,24 +42,13 @@ function LoginForm() {
                     onSubmit={handleSubmit}
                 >
                     <label className="d-flex flex-column">
-                        <div className="text-center">Username: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <br />
-
-                    <label className="d-flex flex-column">
                         <div className="text-center">Email: </div>
                         <input
                             className="w-75 m-auto"
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
                             required
                         />
                     </label>
@@ -53,8 +59,9 @@ function LoginForm() {
                         <input
                             className="w-75 m-auto"
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleInputChange}
                             required
                         />
                     </label>
@@ -71,6 +78,6 @@ function LoginForm() {
             </div>
         </div>
     );
-}
+};
 
 export default LoginForm;
