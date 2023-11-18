@@ -26,8 +26,9 @@ class JobController extends Controller
     //continue: show, create and update only with connection to the user
     public function jobsByCategory(Request $request)
     {
+        $user = Auth::user();
         $categoryId = $request->route('category_id');
-        $jobs = Job::where('user_id', Auth::id())
+        $jobs = Job::where('user_id', $user->id)
             ->where('category_id', $categoryId)
             ->orderBy('time', 'desc')
             ->get();
@@ -53,10 +54,15 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
+
+        if (!Auth::check()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
         $valData = $request->validated();
         $valData['category_id'] = $request->input('category_id');
-
-        $valData['user_id'] = Auth::id();
+        $user = Auth::user();
+        $valData['user_id'] = $user->id;
         $job = Job::create($valData);
         return response()->json(['job' => $job, 'message' => 'Job Added Successfully']);
     }
@@ -96,13 +102,14 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
+        $user = Auth::user();
+        if ($user->id !== $job->user_id) {
+            return response()->json(['error' => 'You do not have permission to update this job.'], 403);
+        }
         $job = Job::find($job->id);
         $valData = $request->validated();
         $valData['category_id'] = $request->input('category_id');
 
-        if ($job->user_id != Auth::id()) {
-            return response()->json(['error' => 'You do not have permission to update this job.'], 403);
-        }
         $job->update($valData);
         return response()->json(['job' => $job, 'message' => 'Job Updated Successfully']);
     }

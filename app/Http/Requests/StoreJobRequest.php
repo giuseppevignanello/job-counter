@@ -31,6 +31,7 @@ class StoreJobRequest extends FormRequest
             'description' => 'nullable',
             'location' => 'nullable',
             'category_id' => ['exists:categories,id'],
+            'user_id' => ['exists:user,id']
         ];
     }
 }

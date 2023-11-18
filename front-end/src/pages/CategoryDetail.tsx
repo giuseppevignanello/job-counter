@@ -26,6 +26,7 @@ const CategoryDetail = () => {
 
     //apiURL [I can take it from the store]
     const apiCategoryUrl = "http://127.0.0.1:8000/api/categories";
+    const apiCategoryJobsUrl = "http://127.0.0.1:8000/api/jobs-by-category";
 
     //Category and jobs by category
     const [category, setCategory] = useState<Category>();
@@ -37,7 +38,7 @@ const CategoryDetail = () => {
         });
 
         axios
-            .get(`${apiCategoryUrl}/${id}`)
+            .get(`${apiCategoryJobsUrl}/${id}`)
             .then((response) => {
                 setCategoryJobs(response.data);
             })
