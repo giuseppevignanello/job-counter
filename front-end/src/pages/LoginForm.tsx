@@ -64,62 +64,57 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
     };
 
     return (
-        <div className="wrapper content">
-            <div className="container">
-                <h2 className="text-center mt-5">Login</h2>
-                <form
-                    className="w-75 m-auto d-flex flex-column"
-                    onSubmit={handleSubmit}
+        <div className="wrapper content w_md_50 m-auto">
+            <h2 className="text-center mt-5">Login</h2>
+            <form className="d-flex flex-column" onSubmit={handleSubmit}>
+                <label className="d-flex flex-column">
+                    <div className="text-center">Email: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <div
+                    className={`${
+                        emailError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
                 >
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Email: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <div
-                        className={`${
-                            emailError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {emailError}
-                    </div>
-                    <br />
+                    {emailError}
+                </div>
+                <br />
 
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Password: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <br />
-                    <div
-                        className={`${
-                            passwordError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {passwordError}
-                    </div>
+                <label className="d-flex flex-column">
+                    <div className="text-center">Password: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <br />
+                <div
+                    className={`${
+                        passwordError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
+                >
+                    {passwordError}
+                </div>
 
-                    <button className="btn btn-dark w-75 m-auto" type="submit">
-                        Login
-                    </button>
-                    <span className="mt-3 text-center">
-                        Do you not have an account?
-                        <Link to={"/"}>Register!.</Link>
-                    </span>
-                </form>
-            </div>
+                <button className="btn btn-dark w-75 m-auto" type="submit">
+                    Login
+                </button>
+                <span className="mt-3 text-center">
+                    Do you not have an account?
+                    <Link to={"/"}>Register!.</Link>
+                </span>
+            </form>
         </div>
     );
 };

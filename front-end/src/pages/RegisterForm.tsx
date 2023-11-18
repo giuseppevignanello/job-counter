@@ -77,13 +77,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
     };
 
     return (
-        <div className="wrapper content">
+        <div className="wrapper content w_md_50 m-auto">
             <div className="container">
                 <h2 className="text-center mt-5">Register</h2>
-                <form
-                    className="w-75 m-auto d-flex flex-column"
-                    onSubmit={handleSubmit}
-                >
+                <form className="d-flex flex-column" onSubmit={handleSubmit}>
                     <label className="d-flex flex-column">
                         <div className="text-center">Username: </div>
                         <input

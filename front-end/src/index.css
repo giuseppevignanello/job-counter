@@ -61,6 +61,9 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+    .w_md_50 {
+        width: 50% !important;
+    }
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -84,6 +87,20 @@ body {
 }
 
 .wrapper {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    height: calc(100vh - 14%);
+    box-shadow: 0px 30px 19px 8px #9c9898;
+}
+
+.wrapper_auth {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
