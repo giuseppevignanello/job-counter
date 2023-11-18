@@ -67,9 +67,12 @@ class AuthController extends Controller
             "userData" => auth()->user()
         ], Response::HTTP_OK);
     }
-    public function logout()
-    {
-        $cookie = Cookie::forget('cookie_token');
-        return response(['message' => "Logout OK"], Response::HTTP_OK)->withCookie($cookie);
-    }
+    // public function logout()
+    // {
+    //     $user = Auth::user();
+    //     $user->tokens->each->delete();
+
+    //     $cookie = Cookie::forget('cookie_token');
+    //     return response(['message' => 'Logout OK'], Response::HTTP_OK)->withCookie($cookie);
+    // }
 }

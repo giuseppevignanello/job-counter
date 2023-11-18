@@ -1,10 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
 
 const AppHeader = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logoutApiUrl = "http://localhost:8000/api/logout";
     function search(e: React.ChangeEvent<HTMLInputElement>): void {
         const searchText = e.target.value;
 
@@ -13,6 +17,18 @@ const AppHeader = () => {
             payload: searchText,
         });
     }
+
+    const handleLogout = async (event: React.FormEvent) => {
+        event.preventDefault();
+        const token = localStorage.getItem("authToken");
+
+        if (token) {
+            localStorage.removeItem("authToken");
+            delete axios.defaults.headers.common["Authorization"];
+            navigate("/");
+            window.location.reload();
+        }
+    };
 
     return (
         <div>
@@ -36,7 +52,7 @@ const AppHeader = () => {
                             </form>
                         </div>
                         <div className="buttons me-2">
-                            <div>
+                            <div className="d-flex gap-2">
                                 <button
                                     type="button"
                                     className="bg_accent myBtn"
@@ -48,6 +64,14 @@ const AppHeader = () => {
                                         Add
                                     </Link>
                                 </button>
+                                <form onSubmit={handleLogout} method="post">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                    >
+                                        Logout
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
