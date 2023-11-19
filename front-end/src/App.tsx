@@ -39,7 +39,7 @@ const App: React.FC = () => {
             {!isAuth ? (
                 <Routes>
                     <Route
-                        index
+                        path="/"
                         element={
                             <RegisterForm updateAuthStatus={updateAuthStatus} />
                         }

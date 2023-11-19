@@ -75,7 +75,7 @@ const TargetApp = () => {
             <ComeBackButton></ComeBackButton>
 
             <div>
-                {targets ? (
+                {targets && targets.length > 0 ? (
                     <div className="text-center">
                         {targets.map((target, index) => (
                             <div className="position-relative" key={index}>

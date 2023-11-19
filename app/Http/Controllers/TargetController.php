@@ -6,6 +6,7 @@ use App\Models\Target;
 use App\Models\Job;
 use App\Http\Requests\StoreTargetRequest;
 use App\Http\Requests\UpdateTargetRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TargetController extends Controller
 {
@@ -16,7 +17,8 @@ class TargetController extends Controller
      */
     public function index()
     {
-        $target = Target::all();
+        $user = Auth::user();
+        $target = Target::where('user_id', $user->id);
         return response()->json($target);
     }
 
