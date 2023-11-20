@@ -18,7 +18,7 @@ class TargetController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $target = Target::where('user_id', $user->id);
+        $target = Target::where('user_id', $user->id)->get();
         return response()->json($target);
     }
 
