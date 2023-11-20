@@ -13,8 +13,9 @@ interface Target {
     deadline: Date;
 }
 const TargetApp = () => {
-    const state = useSelector((state: State) => state.counter);
     const apiUrlTarget = "http://127.0.0.1:8000/api/target";
+    const apiUrlJobs = "http://127.0.0.1:8000/api/jobs";
+    const [jobsCounter, setJobsCounter] = useState<number>(0);
     const [targets, setTargets] = useState<[]>([]);
     const [FormData, setFormData] = useState({
         name: "",
@@ -53,6 +54,23 @@ const TargetApp = () => {
 
     useEffect(() => {
         axios
+            .get(apiUrlJobs)
+            .then((response) => {
+                const fetchedJobs = response.data;
+
+                if (fetchedJobs !== null && fetchedJobs !== undefined) {
+                    setJobsCounter(fetchedJobs.length);
+                } else {
+                    console.error("Response data is null or undefined");
+                }
+            })
+            .catch((error) => {
+                console.error("Error", error);
+            });
+    }, [apiUrlJobs]);
+
+    useEffect(() => {
+        axios
             .get(apiUrlTarget)
             .then((response) => {
                 const fetchedTargets = response.data;
@@ -81,7 +99,7 @@ const TargetApp = () => {
                             <div className="position-relative" key={index}>
                                 <div
                                     className={`completed ${
-                                        state.jobs.length >= target.target
+                                        jobsCounter >= target.target
                                             ? ""
                                             : "d-none"
                                     }`}
@@ -94,7 +112,7 @@ const TargetApp = () => {
                                         {target.motivationalDescription}
                                     </span>{" "}
                                     <span>
-                                        {state.jobs ? state.jobs.length : ""}/{" "}
+                                        {jobsCounter ? jobsCounter : ""}/{" "}
                                         {target.target} 🎯
                                     </span>
                                     <span>
@@ -106,10 +124,9 @@ const TargetApp = () => {
                                             className="progress"
                                             style={{
                                                 width: `${
-                                                    state.jobs.length >=
-                                                    target.target
+                                                    jobsCounter >= target.target
                                                         ? 100
-                                                        : (state.jobs.length /
+                                                        : (jobsCounter /
                                                               target.target) *
                                                           100
                                                 }%`,
