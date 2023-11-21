@@ -28,6 +28,7 @@ class StoreTargetRequest extends FormRequest
             'deadline' => 'required',
             "target" => "required",
             'motivationalDescription' => 'nullable',
+            'user_id' => ['exists:user,id']
         ];
     }
 }

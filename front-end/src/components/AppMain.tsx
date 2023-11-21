@@ -102,7 +102,7 @@ const AppMain = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container-fluid mt-3 mt-md-5">
             <div>
                 {message && (
                     <div className="alert alert-info" role="alert">

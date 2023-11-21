@@ -14,7 +14,8 @@ class Target extends Model
         'name',
         'target',
         'deadline',
-        'motivationalDescription'
+        'motivationalDescription',
+        'user_id'
     ];
 
     public function jobs()

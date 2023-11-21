@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ComeBackButton from "../components/ComeBackButton";
 import { State } from "../state";
 
@@ -106,7 +106,7 @@ const TargetApp = () => {
                                 >
                                     <img src="completed.png" alt="" />
                                 </div>
-                                <div className="card w-50 m-auto p-4 my-3">
+                                <div className="card target_card m-auto p-4 my-3">
                                     <h4>{target.name}</h4>
                                     <span>
                                         {target.motivationalDescription}
@@ -133,6 +133,26 @@ const TargetApp = () => {
                                             }}
                                         ></div>
                                     </div>
+                                </div>
+                                <div className="buttons d-flex gap-2 justify-content-center mt-3">
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <Link
+                                            className="text-white text-decoration-none"
+                                            to={`/target-edit/${target.id}`}
+                                            key={target.id}
+                                        >
+                                            Edit
+                                        </Link>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         ))}

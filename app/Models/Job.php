@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Job extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'company',
         'title',

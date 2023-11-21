@@ -40,7 +40,13 @@ class TargetController extends Controller
      */
     public function store(StoreTargetRequest $request)
     {
+
+        if (!Auth::check()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
         $valData = $request->validated();
+        $user = Auth::user();
+        $valData['user_id'] = $user->id;
         $target = Target::create($valData);
         return response()->json($target);
     }
@@ -53,7 +59,12 @@ class TargetController extends Controller
      */
     public function show(Target $target)
     {
-        //
+        if ($target->user_id != Auth::id()) {
+            return response()->json(['error' => 'You do not have permission to view this target.'], 403);
+        }
+
+        $target = Target::find($target->id);
+        return response()->json($target);
     }
 
     /**
@@ -76,10 +87,16 @@ class TargetController extends Controller
      */
     public function update(UpdateTargetRequest $request, Target $target)
     {
+
+        $user = Auth::user();
+        if ($user->id !== $target->user_id) {
+            return response()->json(['error' => 'You do not have permission to update this target.'], 403);
+        }
+
         $target = Target::find($target->id);
         $valData = $request->validated();
         $target->update($valData);
-        return response()->json($target);
+        return response()->json(['target' => $target, 'message' => 'Target Updated Successfully']);
     }
 
     /**
@@ -90,6 +107,9 @@ class TargetController extends Controller
      */
     public function delete(Target $target)
     {
+        if (!Auth::check()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
         $target = Target::find($target->id);
         $target->delete();
     }

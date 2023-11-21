@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/jobs-by-category/{category_id}', [JobController::class, "jobsByCategory"]);
     Route::get('/target', [TargetController::class, 'index']);
     Route::post('/target', [TargetController::class, 'store']);
+    Route::get('/target/{target}', [TargetController::class, 'show']);
     Route::put('/target/{target}', [TargetController::class, 'update']);
     Route::delete('target/{target}', [TargetController::class, 'delete']);
 });

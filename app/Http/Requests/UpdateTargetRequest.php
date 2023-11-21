@@ -28,6 +28,7 @@ class UpdateTargetRequest extends FormRequest
             'deadline' => 'required',
             "target" => "required",
             'motivationalDescription' => 'nullable',
+            'user_id' => 'required'
         ];
     }
 }

@@ -11,6 +11,7 @@ import CategoryDetail from "./pages/CategoryDetail";
 import TargetApp from "./pages/TargetApp";
 import RegisterForm from "./pages/RegisterForm";
 import LoginForm from "./pages/LoginForm";
+import TargetEdit from "./pages/TargetEdit";
 
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState(() => {
@@ -74,6 +75,10 @@ const App: React.FC = () => {
                                     <Route
                                         path="target"
                                         element={<TargetApp />}
+                                    />
+                                    <Route
+                                        path="target-edit/:id"
+                                        element={<TargetEdit />}
                                     />
                                 </Route>
                             </Routes>
