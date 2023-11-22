@@ -1,0 +1,32 @@
+@media screen and (min-width: 768px) {
+    .w_md_50 {
+        width: 50% !important;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .applied {
+        grid-row: span 3;
+    }
+
+    .applied .box-content {
+        height: 465px;
+    }
+
+    .left {
+        grid-row: span 1;
+    }
+
+    .right {
+        grid-row: span 1;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .target_card {
+        width: 90%;
+    }
+}

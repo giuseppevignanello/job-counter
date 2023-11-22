@@ -1,0 +1,39 @@
+.box {
+    padding: 1rem;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.box_title {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.box_title,
+.box_item {
+    border-bottom: 1px solid gray;
+}
+
+.box_item {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.box-content {
+    overflow-y: scroll;
+    height: 180px;
+    border-left: 1px solid rgb(158, 158, 158);
+    border-right: 1px solid rgb(158, 158, 158);
+    border-bottom: 1px solid rgb(158, 158, 158);
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+
+.job_title {
+    margin-bottom: 0.3rem !important;
+}
+
+.job_company {
+    font-weight: 300;
+}
