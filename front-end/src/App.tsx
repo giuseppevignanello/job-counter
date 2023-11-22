@@ -12,7 +12,6 @@ import TargetApp from "./pages/TargetApp";
 import RegisterForm from "./pages/RegisterForm";
 import LoginForm from "./pages/LoginForm";
 import TargetEdit from "./pages/TargetEdit";
-import AppModal from "./components/AppModal";
 
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState(() => {
@@ -38,7 +37,6 @@ const App: React.FC = () => {
     }, []);
     return (
         <BrowserRouter>
-            <AppModal></AppModal>
             {!isAuth ? (
                 <Routes>
                     <Route

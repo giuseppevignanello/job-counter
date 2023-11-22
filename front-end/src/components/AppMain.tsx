@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
 import { useSelector } from "react-redux";
 import { State } from "../state";
+import AppModal from "../components/AppModal";
 
 //interfaces
 interface Job {
@@ -108,6 +109,7 @@ const AppMain = () => {
 
     return (
         <div className="container-fluid">
+            <AppModal modal="logout"></AppModal>
             <div>
                 {message && (
                     <div className="alert alert-info" role="alert">

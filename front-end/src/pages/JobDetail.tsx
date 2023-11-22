@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux/es/exports";
-import { ActionType } from "../state/action-types";
+
 import { useParams } from "react-router-dom";
 import ComeBackButton from "../components/ComeBackButton";
+import AppModal from "../components/AppModal";
 
 interface Job {
     id: number;
@@ -18,29 +18,16 @@ interface Job {
 
 const JobDetail = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
     const apiUrl = "http://127.0.0.1:8000/api/jobs";
+
+    function openModal(event: React.FormEvent) {
+        event.preventDefault();
+        const modal = document.getElementById("overlay");
+        modal?.classList.toggle("d-none");
+    }
 
     const [job, setJob] = useState<Job>(Object);
     const { id } = useParams<{ id: string }>();
-
-    //Delete Method
-    function destroy() {
-        axios
-            .delete(`${apiUrl}/${id}`)
-            .then((response) => {
-                const message = response.data.message;
-                dispatch({
-                    type: ActionType.MESSAGE,
-                    payload: message,
-                });
-                navigate("/");
-            })
-            .catch((error) => {
-                console.error("Error", error);
-            });
-    }
 
     useEffect(() => {
         axios
@@ -56,6 +43,7 @@ const JobDetail = () => {
 
     return (
         <div className="container mt-2">
+            <AppModal modal="delete"></AppModal>
             <ComeBackButton destination="/"></ComeBackButton>
             <div className="card w-50 m-auto p-3">
                 <h3>{job.title}</h3>
@@ -81,7 +69,7 @@ const JobDetail = () => {
                 <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={destroy}
+                    onClick={openModal}
                 >
                     Delete
                 </button>
