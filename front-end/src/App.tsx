@@ -12,6 +12,7 @@ import TargetApp from "./pages/TargetApp";
 import RegisterForm from "./pages/RegisterForm";
 import LoginForm from "./pages/LoginForm";
 import TargetEdit from "./pages/TargetEdit";
+import AppModal from "./components/AppModal";
 
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState(() => {
@@ -37,6 +38,7 @@ const App: React.FC = () => {
     }, []);
     return (
         <BrowserRouter>
+            <AppModal></AppModal>
             {!isAuth ? (
                 <Routes>
                     <Route
@@ -55,8 +57,9 @@ const App: React.FC = () => {
             ) : (
                 <div className="wrapper">
                     <AppHeader></AppHeader>
-                    <div className="main_section">
+                    <div className="main_section ">
                         <SideBar></SideBar>
+
                         <div className="content content-container">
                             <Routes>
                                 <Route>

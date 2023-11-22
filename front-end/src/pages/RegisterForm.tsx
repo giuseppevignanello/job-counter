@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -77,98 +76,101 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
     };
 
     return (
-        <div className="wrapper content w_md_50 m-auto">
-            <div className="container">
-                <h2 className="text-center mt-5">Register</h2>
-                <form className="d-flex flex-column" onSubmit={handleSubmit}>
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Username: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <div
-                        className={`${
-                            nameError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {nameError}
-                    </div>
-                    <br />
+        <div className="wrapper content w_md_50 m-auto overflow-y-auto">
+            <h2 className="text-center mt-5">Register</h2>
+            <form
+                className="d-flex flex-column container"
+                onSubmit={handleSubmit}
+            >
+                <label className="d-flex flex-column">
+                    <div className="text-center">Username: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <div
+                    className={`${
+                        nameError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
+                >
+                    {nameError}
+                </div>
+                <br />
 
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Email: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <div
-                        className={`${
-                            emailError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {emailError}
-                    </div>
-                    <br />
+                <label className="d-flex flex-column">
+                    <div className="text-center">Email: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <div
+                    className={`${
+                        emailError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
+                >
+                    {emailError}
+                </div>
+                <br />
 
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Password: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <div
-                        className={`${
-                            passwordError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {passwordError}
-                    </div>
-                    <br />
-                    <label className="d-flex flex-column">
-                        <div className="text-center">Repeat Password: </div>
-                        <input
-                            className="w-75 m-auto"
-                            type="password"
-                            name="password_confirmation"
-                            value={formData.password_confirmation}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </label>
-                    <div
-                        className={`${
-                            repeatPasswordError ? "d-block" : "d-none"
-                        } badge bg-danger w-75 m-auto mt-2`}
-                    >
-                        {repeatPasswordError}
-                    </div>
-                    <br />
+                <label className="d-flex flex-column">
+                    <div className="text-center">Password: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <div
+                    className={`${
+                        passwordError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
+                >
+                    {passwordError}
+                </div>
+                <br />
+                <label className="d-flex flex-column">
+                    <div className="text-center">Repeat Password: </div>
+                    <input
+                        className="w-75 m-auto"
+                        type="password"
+                        name="password_confirmation"
+                        value={formData.password_confirmation}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <div
+                    className={`${
+                        repeatPasswordError ? "d-block" : "d-none"
+                    } badge bg-danger w-75 m-auto mt-2`}
+                >
+                    {repeatPasswordError}
+                </div>
+                <br />
 
-                    <button className="btn btn-dark w-75 m-auto" type="submit">
-                        Register
-                    </button>
-                    <span className="mt-3 text-center">
-                        Do you already have an account?
-                        <Link to={"/login"}>Log in!</Link>
-                    </span>
-                </form>
-            </div>
+                <button className="btn btn-dark w-75 m-auto" type="submit">
+                    Register
+                </button>
+                <span className="mt-3 text-center">
+                    Do you already have an account?
+                    <Link className="text-decoration-none" to={"/login"}>
+                        Log in!
+                    </Link>
+                </span>
+            </form>
         </div>
     );
 };

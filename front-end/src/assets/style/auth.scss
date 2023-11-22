@@ -1,0 +1,18 @@
+#overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000063;
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+
+}
+
+.logout_modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}

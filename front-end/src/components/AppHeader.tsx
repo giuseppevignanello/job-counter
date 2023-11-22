@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
@@ -20,17 +19,12 @@ const AppHeader = () => {
     }
 
     //handle logout removing the token from local storage
-    const handleLogout = async (event: React.FormEvent) => {
-        event.preventDefault();
-        const token = localStorage.getItem("authToken");
 
-        if (token) {
-            localStorage.removeItem("authToken");
-            delete axios.defaults.headers.common["Authorization"];
-            navigate("/");
-            window.location.reload();
-        }
-    };
+    function openLogoutModal(event: React.FormEvent) {
+        event.preventDefault();
+        const modal = document.getElementById("overlay");
+        modal?.classList.toggle("d-none");
+    }
 
     return (
         <div>
@@ -66,14 +60,14 @@ const AppHeader = () => {
                                         Add
                                     </Link>
                                 </button>
-                                <form onSubmit={handleLogout} method="post">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary"
-                                    >
-                                        Logout
-                                    </button>
-                                </form>
+
+                                <button
+                                    onClick={openLogoutModal}
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
+                                    Logout
+                                </button>
                             </div>
                         </div>
                     </div>

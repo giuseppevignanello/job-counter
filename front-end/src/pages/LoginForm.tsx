@@ -64,7 +64,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
     };
 
     return (
-        <div className="wrapper content w_md_50 m-auto">
+        <div className="wrapper content w_md_50 m-auto overflow-y-auto">
             <h2 className="text-center mt-5">Login</h2>
             <form className="d-flex flex-column" onSubmit={handleSubmit}>
                 <label className="d-flex flex-column">
@@ -112,7 +112,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
                 </button>
                 <span className="mt-3 text-center">
                     Do you not have an account?
-                    <Link to={"/"}>Register!.</Link>
+                    <Link className="text-decoration-none" to={"/"}>
+                        {" "}
+                        Register!
+                    </Link>
                 </span>
             </form>
         </div>
