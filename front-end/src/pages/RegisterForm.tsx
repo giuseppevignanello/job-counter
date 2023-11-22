@@ -14,10 +14,10 @@ interface FormData {
     password_confirmation: string;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ updateAuthStatus }) => {
+const RegisterForm: React.FC<RegisterFormProps> = () => {
     const navigate = useNavigate();
     const registerApiUrl = "http://localhost:8000/api/register";
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         name: "",
         email: "",
         password: "",

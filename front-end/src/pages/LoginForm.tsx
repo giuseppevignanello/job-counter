@@ -13,7 +13,7 @@ interface FormData {
 const LoginForm: React.FC<LoginFormProps> = ({ updateAuthStatus }) => {
     const navigate = useNavigate();
     const loginApiUrl = "http://localhost:8000/api/login";
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
     });

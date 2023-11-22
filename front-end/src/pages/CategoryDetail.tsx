@@ -20,11 +20,11 @@ interface Category {
 }
 
 const CategoryDetail = () => {
-    //state
+    //state and Params
     const state = useSelector((state: State) => state.search);
     const { id } = useParams();
 
-    //apiURL [I can take it from the store]
+    //apiURL
     const apiCategoryUrl = "http://127.0.0.1:8000/api/categories";
     const apiCategoryJobsUrl = "http://127.0.0.1:8000/api/jobs-by-category";
 
