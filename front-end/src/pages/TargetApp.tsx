@@ -90,7 +90,7 @@ const TargetApp = () => {
 
     return (
         <div className="container mt-4">
-            <ComeBackButton></ComeBackButton>
+            <ComeBackButton destination="/"></ComeBackButton>
 
             <div>
                 {targets && targets.length > 0 ? (

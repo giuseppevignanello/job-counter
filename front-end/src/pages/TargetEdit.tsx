@@ -49,10 +49,10 @@ const TargetEdit = () => {
     return (
         <div>
             <div className="mt-3">
-                <ComeBackButton></ComeBackButton>
+                <ComeBackButton destination="/target"></ComeBackButton>
             </div>
             <div className="my-4">
-                <h4>Set a new Target</h4>
+                <h4>Edit "{FormData.name}" target</h4>
                 <form onSubmit={send}>
                     <div className="my-3 d-md-flex justify-content-around">
                         <div className="w-50">

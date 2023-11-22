@@ -56,7 +56,7 @@ const JobDetail = () => {
 
     return (
         <div className="container mt-2">
-            <ComeBackButton></ComeBackButton>
+            <ComeBackButton destination="/"></ComeBackButton>
             <div className="card w-50 m-auto p-3">
                 <h3>{job.title}</h3>
                 <p>{job.company}</p>

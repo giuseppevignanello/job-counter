@@ -1,4 +1,3 @@
-import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +5,11 @@ import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
 
 const AppHeader = () => {
+    //general
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const logoutApiUrl = "http://localhost:8000/api/logout";
+
+    //search function
     function search(e: React.ChangeEvent<HTMLInputElement>): void {
         const searchText = e.target.value;
 
@@ -18,6 +19,7 @@ const AppHeader = () => {
         });
     }
 
+    //handle logout removing the token from local storage
     const handleLogout = async (event: React.FormEvent) => {
         event.preventDefault();
         const token = localStorage.getItem("authToken");

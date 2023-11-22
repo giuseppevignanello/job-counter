@@ -66,7 +66,7 @@ const CategoryDetail = () => {
 
     return (
         <div className="container mt-3">
-            <ComeBackButton></ComeBackButton>
+            <ComeBackButton destination="/"></ComeBackButton>
             <h2 className="mt-4 text-center bg_main py-2">
                 {category?.name} Jobs
             </h2>

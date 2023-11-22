@@ -125,7 +125,7 @@ const Create = () => {
 
     return (
         <div className="container mt-4">
-            <ComeBackButton></ComeBackButton>
+            <ComeBackButton destination="/"></ComeBackButton>
             <form onSubmit={send}>
                 <div className="mb-3 d-md-flex justify-content-center">
                     <div className="w-50">

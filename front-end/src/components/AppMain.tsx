@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
@@ -6,6 +6,7 @@ import { ActionType } from "../state/action-types";
 import { useSelector } from "react-redux";
 import { State } from "../state";
 
+//interfaces
 interface Job {
     id: number;
     time: string;
@@ -13,26 +14,29 @@ interface Job {
     company: string;
     category_id: number;
 }
-
 interface Category {
     id: number;
     name: string;
 }
 
 const AppMain = () => {
-    //state
+    //general
+    const dispatch = useDispatch();
+
+    //state: search, message
     const search = useSelector((state: State) => state.search);
     const messageObject = useSelector((state: State) => state.message);
     const [message, setMessage] = useState<string>(messageObject.message);
 
+    //hide message
     setTimeout(() => {
         setMessage("");
     }, 3000);
 
-    const dispatch = useDispatch();
+    //dispatch
 
     //apiURL
-    const [apiUrl, setApiUrl] = useState<string>("http://127.0.0.1:8000/api");
+    const apiUrl: string = "http://127.0.0.1:8000/api";
 
     //jobs and categories
     const [jobs, setJobs] = useState<Job[]>([]);
@@ -40,6 +44,7 @@ const AppMain = () => {
 
     type CategorizedJobs = Record<string, Job[]>;
 
+    //get all the jobs
     useEffect(() => {
         axios
             .get(`${apiUrl}/jobs`)
@@ -102,7 +107,7 @@ const AppMain = () => {
     }
 
     return (
-        <div className="container-fluid mt-3 mt-md-5">
+        <div className="container-fluid">
             <div>
                 {message && (
                     <div className="alert alert-info" role="alert">
@@ -117,6 +122,7 @@ const AppMain = () => {
                 {Object.keys(categorizedJobs).map(
                     (categoryName, categoryId) => (
                         <div
+                            //set "applied" box full height
                             key={categoryName}
                             className={`box ${
                                 categoryId === 1
@@ -138,7 +144,7 @@ const AppMain = () => {
                             <div>
                                 <ul className="list-unstyled box-content px-2">
                                     {categorizedJobs[categoryName].map(
-                                        (job, index) => (
+                                        (job) => (
                                             <Link
                                                 className="text-dark text-decoration-none"
                                                 to={`/job_detail/${job.id}`}
