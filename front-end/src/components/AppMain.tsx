@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
@@ -44,6 +44,13 @@ const AppMain = () => {
     const [categories, setCategories] = useState<Category[]>([]);
 
     type CategorizedJobs = Record<string, Job[]>;
+
+    //move panel
+    const [openPanel, setOpenPanel] = useState<number | null>(null);
+
+    const handleMoveClick = (jobId: number) => {
+        setOpenPanel(openPanel === jobId ? null : jobId);
+    };
 
     //get all the jobs
     useEffect(() => {
@@ -107,6 +114,24 @@ const AppMain = () => {
         return date.toLocaleDateString(undefined);
     }
 
+    const navigate = useNavigate();
+    //fast update categories
+    function update(jobId: number, categoryId: number) {
+        axios
+            .put(`${apiUrl}/jobs/${jobId}`, categoryId)
+            .then((response) => {
+                const message = response.data.message;
+                dispatch({
+                    type: ActionType.MESSAGE,
+                    payload: message,
+                });
+                navigate("/");
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }
+
     return (
         <div className="container-fluid">
             <AppModal modal="logout"></AppModal>
@@ -147,12 +172,12 @@ const AppMain = () => {
                                 <ul className="list-unstyled box-content px-2">
                                     {categorizedJobs[categoryName].map(
                                         (job) => (
-                                            <Link
-                                                className="text-dark text-decoration-none"
-                                                to={`/job_detail/${job.id}`}
-                                                key={job.id}
-                                            >
-                                                <li className="box_item d-flex justify-content-between">
+                                            <li className="box_item d-flex justify-content-between">
+                                                <Link
+                                                    className="text-dark text-decoration-none "
+                                                    to={`/job_detail/${job.id}`}
+                                                    key={job.id}
+                                                >
                                                     <div>
                                                         <p className="job_title">
                                                             {job.title}
@@ -161,15 +186,60 @@ const AppMain = () => {
                                                             {job.company}
                                                         </span>
                                                     </div>
-                                                    <div className="d-flex align-items-end">
-                                                        <p>
-                                                            {formatDate(
-                                                                job.time
-                                                            )}
-                                                        </p>
+                                                </Link>
+                                                <div className="d-flex flex-column align-items-end position-relative ">
+                                                    <p>
+                                                        {formatDate(job.time)}
+                                                    </p>
+                                                    <div>
+                                                        <div
+                                                            className={`move_panel ${
+                                                                openPanel ===
+                                                                job.id
+                                                                    ? ""
+                                                                    : "d-none"
+                                                            }`}
+                                                        >
+                                                            <ul className="list-unstyled fs-5">
+                                                                <li
+                                                                    onClick={() =>
+                                                                        update(
+                                                                            job.id,
+                                                                            0
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    🤔Saved
+                                                                </li>
+                                                                <li>
+                                                                    🤞Applied
+                                                                </li>
+                                                                <li>
+                                                                    😢Refused
+                                                                </li>
+                                                                <li>
+                                                                    😊 Interview
+                                                                </li>
+                                                                <li>
+                                                                    😍 Offer
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <button
+                                                            type="button"
+                                                            className="text-white bg_accent myBtn fs-6"
+                                                            onClick={() =>
+                                                                handleMoveClick(
+                                                                    job.id
+                                                                )
+                                                            }
+                                                        >
+                                                            Move
+                                                        </button>
                                                     </div>
-                                                </li>
-                                            </Link>
+                                                </div>
+                                            </li>
                                         )
                                     )}
                                 </ul>
