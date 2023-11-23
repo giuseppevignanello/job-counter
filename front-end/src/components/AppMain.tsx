@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/exports";
 import { ActionType } from "../state/action-types";
@@ -10,10 +10,13 @@ import AppModal from "../components/AppModal";
 //interfaces
 interface Job {
     id: number;
-    time: string;
     title: string;
     company: string;
+    url: string;
+    description: string;
+    location: string;
     category_id: number;
+    time: string;
 }
 interface Category {
     id: number;
@@ -114,22 +117,35 @@ const AppMain = () => {
         return date.toLocaleDateString(undefined);
     }
 
-    const navigate = useNavigate();
     //fast update categories
-    function update(jobId: number, categoryId: number) {
-        axios
-            .put(`${apiUrl}/jobs/${jobId}`, categoryId)
-            .then((response) => {
-                const message = response.data.message;
-                dispatch({
-                    type: ActionType.MESSAGE,
-                    payload: message,
+
+    let updatedData: Job;
+    function fastUpdate(jobId: number, categoryId: number) {
+        //getting the specific job
+        axios.get(`${apiUrl}/jobs/${jobId}`).then((response) => {
+            const existingData = response.data;
+
+            //setting the new category
+            updatedData = {
+                ...existingData,
+                category_id: categoryId,
+            };
+
+            //update
+            axios
+                .put(`${apiUrl}/jobs/${jobId}`, updatedData)
+                .then((response) => {
+                    const message = response.data.message;
+                    dispatch({
+                        type: ActionType.MESSAGE,
+                        payload: message,
+                    });
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
                 });
-                navigate("/");
-            })
-            .catch((error) => {
-                console.error("Error: ", error);
-            });
+        });
     }
 
     return (
@@ -172,7 +188,10 @@ const AppMain = () => {
                                 <ul className="list-unstyled box-content px-2">
                                     {categorizedJobs[categoryName].map(
                                         (job) => (
-                                            <li className="box_item d-flex justify-content-between">
+                                            <li
+                                                className="box_item d-flex justify-content-between"
+                                                key={job.id}
+                                            >
                                                 <Link
                                                     className="text-dark text-decoration-none "
                                                     to={`/job_detail/${job.id}`}
@@ -203,24 +222,52 @@ const AppMain = () => {
                                                             <ul className="list-unstyled fs-5">
                                                                 <li
                                                                     onClick={() =>
-                                                                        update(
+                                                                        fastUpdate(
                                                                             job.id,
-                                                                            0
+                                                                            1
                                                                         )
                                                                     }
                                                                 >
                                                                     🤔Saved
                                                                 </li>
-                                                                <li>
+                                                                <li
+                                                                    onClick={() =>
+                                                                        fastUpdate(
+                                                                            job.id,
+                                                                            2
+                                                                        )
+                                                                    }
+                                                                >
                                                                     🤞Applied
                                                                 </li>
-                                                                <li>
+                                                                <li
+                                                                    onClick={() =>
+                                                                        fastUpdate(
+                                                                            job.id,
+                                                                            5
+                                                                        )
+                                                                    }
+                                                                >
                                                                     😢Refused
                                                                 </li>
-                                                                <li>
+                                                                <li
+                                                                    onClick={() =>
+                                                                        fastUpdate(
+                                                                            job.id,
+                                                                            3
+                                                                        )
+                                                                    }
+                                                                >
                                                                     😊 Interview
                                                                 </li>
-                                                                <li>
+                                                                <li
+                                                                    onClick={() =>
+                                                                        fastUpdate(
+                                                                            job.id,
+                                                                            4
+                                                                        )
+                                                                    }
+                                                                >
                                                                     😍 Offer
                                                                 </li>
                                                             </ul>
