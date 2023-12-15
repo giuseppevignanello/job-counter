@@ -16,7 +16,6 @@ import TargetEdit from "./pages/TargetEdit";
 const App: React.FC = () => {
     const [isAuth, setIsAuth] = useState(() => {
         const storedToken = localStorage.getItem("authToken");
-        console.log(storedToken);
         const isAuthenticated = storedToken !== null;
         return isAuthenticated;
     });

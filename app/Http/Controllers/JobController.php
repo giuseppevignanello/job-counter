@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,16 @@ class JobController extends Controller
     {
 
         $user = Auth::user();
+        $categories = Category::all();
         $jobs = Job::where('user_id', $user->id)->orderBy('time', 'desc')->get();
-        return response()->json($jobs);
+        $categorizedJobs = [];
+
+        foreach ($categories as $category) {
+            $filteredJobs = $jobs->where('category_id', $category->id);
+
+            $categorizedJobs[$category->name] = $filteredJobs;
+        }
+        return response()->json($categorizedJobs);
     }
 
     //continue: show, create and update only with connection to the user

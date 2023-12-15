@@ -50,3 +50,7 @@
     background: var(--background-light);
     z-index: 2;
 }
+
+.move_button:hover {
+    cursor: pointer;
+}

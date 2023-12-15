@@ -43,7 +43,7 @@ const AppMain = () => {
     const apiUrl: string = "http://127.0.0.1:8000/api";
 
     //jobs and categories
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [categorizedJobs, setCategorizedJobs] = useState<CategorizedJobs>({});
     const [categories, setCategories] = useState<Category[]>([]);
 
     type CategorizedJobs = Record<string, Job[]>;
@@ -61,13 +61,13 @@ const AppMain = () => {
             .get(`${apiUrl}/jobs`)
             .then((response) => {
                 const fetchedJobs = response.data;
-                setJobs(fetchedJobs);
+                setCategorizedJobs(fetchedJobs);
             })
             .catch((error) => {
                 console.error("Error", error);
             });
     }, [apiUrl]);
-
+    console.log(categorizedJobs);
     //get the categories
     useEffect(() => {
         axios.get(`${apiUrl}/categories`).then((response) => {
@@ -76,40 +76,38 @@ const AppMain = () => {
         });
     }, [`${apiUrl}/categories`]);
 
-    //putting the jobs into each category
-    const categorizedJobs: CategorizedJobs = {};
-    categories.forEach((category) => {
-        //search function
-        if (search.search) {
-            categorizedJobs[category.name] = jobs.filter(
-                (job) =>
-                    job.category_id === category.id &&
-                    (job.title
-                        .toLowerCase()
-                        .includes(search.search.toLowerCase()) ||
-                        job.company
-                            .toLowerCase()
-                            .includes(search.search.toLowerCase()))
-            );
-        } else {
-            categorizedJobs[category.name] = jobs.filter(
-                (job) => job.category_id === category.id
-            );
-        }
-    });
+    // categories.forEach((category) => {
+    //     //search function
+    //     if (search.search) {
+    //         categorizedJobs[category.name] = jobs.filter(
+    //             (job) =>
+    //                 job.category_id === category.id &&
+    //                 (job.title
+    //                     .toLowerCase()
+    //                     .includes(search.search.toLowerCase()) ||
+    //                     job.company
+    //                         .toLowerCase()
+    //                         .includes(search.search.toLowerCase()))
+    //         );
+    //     } else {
+    //         categorizedJobs[category.name] = jobs.filter(
+    //             (job) => job.category_id === category.id
+    //         );
+    //     }
+    // });
 
     //store jobs (all and by category)
-    useEffect(() => {
-        dispatch({
-            type: ActionType.JOBS,
-            payload: jobs,
-        });
+    // useEffect(() => {
+    //     dispatch({
+    //         type: ActionType.JOBS,
+    //         payload: jobs,
+    //     });
 
-        dispatch({
-            type: ActionType.CATEGORIZEDJOBS,
-            payload: categorizedJobs,
-        });
-    });
+    //     dispatch({
+    //         type: ActionType.CATEGORIZEDJOBS,
+    //         payload: categorizedJobs,
+    //     });
+    // });
 
     //Format Date
     function formatDate(timeString: string) {
@@ -221,6 +219,7 @@ const AppMain = () => {
                                                         >
                                                             <ul className="list-unstyled fs-5">
                                                                 <li
+                                                                    className="move_button"
                                                                     onClick={() =>
                                                                         fastUpdate(
                                                                             job.id,
@@ -231,6 +230,7 @@ const AppMain = () => {
                                                                     🤔Saved
                                                                 </li>
                                                                 <li
+                                                                    className="move_button"
                                                                     onClick={() =>
                                                                         fastUpdate(
                                                                             job.id,
@@ -241,6 +241,7 @@ const AppMain = () => {
                                                                     🤞Applied
                                                                 </li>
                                                                 <li
+                                                                    className="move_button"
                                                                     onClick={() =>
                                                                         fastUpdate(
                                                                             job.id,
@@ -251,6 +252,7 @@ const AppMain = () => {
                                                                     😢Refused
                                                                 </li>
                                                                 <li
+                                                                    className="move_button"
                                                                     onClick={() =>
                                                                         fastUpdate(
                                                                             job.id,
@@ -261,6 +263,7 @@ const AppMain = () => {
                                                                     😊 Interview
                                                                 </li>
                                                                 <li
+                                                                    className="move_button"
                                                                     onClick={() =>
                                                                         fastUpdate(
                                                                             job.id,
